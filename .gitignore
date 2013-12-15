@@ -1,0 +1,6 @@
+#code archive
+*.zip
+
+#folders
+/obj
+/bin
