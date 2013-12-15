@@ -40,6 +40,7 @@
 			<Add option="-std=c++11" />
 			<Add option="-Wall" />
 			<Add directory="/usr/local/include/" />
+			<Add directory="include" />
 		</Compiler>
 		<Linker>
 			<Add library="sfml-system" />
@@ -47,10 +48,16 @@
 			<Add library="sfml-graphics" />
 			<Add directory="/usr/local/lib/" />
 		</Linker>
-		<Unit filename="headers/Game.hpp" />
-		<Unit filename="headers/ResourceHolder.hpp" />
+		<Unit filename="include/Aircraft.h" />
+		<Unit filename="include/Entity.h" />
+		<Unit filename="include/Game.hpp" />
+		<Unit filename="include/ResourceHolder.hpp" />
+		<Unit filename="include/SceneNode.h" />
+		<Unit filename="src/Aircraft.cpp" />
+		<Unit filename="src/Entity.cpp" />
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/ResourceHolder.inl" />
+		<Unit filename="src/SceneNode.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
