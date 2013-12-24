@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "World.h"
 class Game
 {
     public:
@@ -24,24 +25,33 @@ class Game
         bool mIsMovingLeft;
         bool mIsMovingRight;
         bool mIsMovingUp;
+        World mWorld;
 
 
 };
 
 // Resource ID for sf::Texture
-namespace Textures
+/*namespace Textures
 {
 	enum ID
 	{
 		Landscape,
 		Airplane,
 	};
-}
+}*/
 
 int main()
 {
+    try
+    {
     Game game;
     game.run();
+    }
+    catch (std::exception e)
+    {
+    std::cout << "\nEXCEPTION: "<< e.what() <<std::endl;
+    }
+
 }
 
 #endif //GAME_HPP

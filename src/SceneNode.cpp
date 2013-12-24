@@ -6,7 +6,7 @@ SceneNode::SceneNode()
     mParent = nullptr;
 }
 
-void SceneNode::attachCild(Ptr child)
+void SceneNode::attachChild(Ptr child)
 {
     child->mParent = this;
     mChildren.push_back(std::move(child));
@@ -26,6 +26,24 @@ SceneNode::Ptr SceneNode::detachChild(const SceneNode& node)
 
 }
 
+void SceneNode::update(sf::Time dt)
+{
+    updateCurrent(dt);
+    updateChildren(dt);
+}
+
+void SceneNode::updateChildren(sf::Time dt)
+{
+    for(auto itr = mChildren.begin(); itr!=mChildren.end(); ++itr)
+    {
+        (*itr)->update(dt);
+    }
+}
+
+void SceneNode::updateCurrent(sf::Time dt)
+{
+}
+
 void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     states.transform *= getTransform();
@@ -41,4 +59,18 @@ void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const
 void    SceneNode::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
 {
     // Do nothing by default
+}
+
+sf::Transform SceneNode::getWorldTransform() const
+{
+    sf::Transform trans = sf::Transform::Identity;
+    for (const SceneNode* node = this; node!=nullptr; node = node->mParent)
+    {
+        trans = node->getTransform() * trans;
+    }
+}
+
+sf::Vector2f SceneNode::getWorldPosition() const
+{
+    return getWorldTransform() * sf::Vector2f();
 }

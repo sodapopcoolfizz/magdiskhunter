@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1387100852 source:/home/vincent/magdiskmaster/src/Game.cpp
+1387823543 source:/home/vincent/magdiskmaster/src/Game.cpp
 	"ResourceHolder.hpp"
 	"Game.hpp"
 
@@ -685,10 +685,10 @@
 
 1387014727 /home/vincent/magdiskmaster/src/ResourceHolder.inl
 
-1387101138 source:/home/vincent/magdiskmaster/src/Entity.cpp
+1387620208 source:/home/vincent/magdiskmaster/src/Entity.cpp
 	"Entity.h"
 
-1387118419 /home/vincent/magdiskmaster/include/Entity.h
+1387620145 /home/vincent/magdiskmaster/include/Entity.h
 	<SFML/System.hpp>
 	"SceneNode.h"
 
@@ -700,22 +700,47 @@
 	<cassert>
 	"../src/ResourceHolder.inl"
 
-1387100474 /home/vincent/magdiskmaster/include/Game.hpp
+1387822856 /home/vincent/magdiskmaster/include/Game.hpp
 	<SFML/Graphics.hpp>
 	<iostream>
+	"World.h"
 
-1387118757 /home/vincent/magdiskmaster/include/SceneNode.h
+1387819426 /home/vincent/magdiskmaster/include/SceneNode.h
 	<memory>
 	<vector>
 	"SFML/Graphics.hpp"
 
-1387118706 source:/home/vincent/magdiskmaster/src/Aircraft.cpp
+1387618321 source:/home/vincent/magdiskmaster/src/Aircraft.cpp
 	"Aircraft.h"
 
-1387118518 /home/vincent/magdiskmaster/include/Aircraft.h
+1387617833 /home/vincent/magdiskmaster/include/Aircraft.h
 	"Entity.h"
+	"ResourceHolder.hpp"
+	"ResourceIdentifiers.hpp"
 
-1387118846 source:/home/vincent/magdiskmaster/src/SceneNode.cpp
+1387819418 source:/home/vincent/magdiskmaster/src/SceneNode.cpp
 	"SceneNode.h"
 	<cassert>
+
+1387819450 /home/vincent/magdiskmaster/include/ResourceIdentifiers.hpp
+	"ResourceHolder.hpp"
+
+1387809019 source:/home/vincent/magdiskmaster/src/SpriteNode.cpp
+	"SpriteNode.h"
+
+1387808679 /home/vincent/magdiskmaster/include/SpriteNode.h
+	"SceneNode.h"
+
+1387819479 /home/vincent/magdiskmaster/include/World.h
+	<array>
+	"SFML/System.hpp"
+	"SFML/Graphics.hpp"
+	"SceneNode.h"
+	"ResourceIdentifiers.hpp"
+	"ResourceHolder.hpp"
+	"Aircraft.h"
+	"SpriteNode.h"
+
+1387823188 source:/home/vincent/magdiskmaster/src/World.cpp
+	"World.h"
 

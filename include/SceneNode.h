@@ -4,15 +4,29 @@
 #include <vector>
 #include "SFML/Graphics.hpp"
 
+
 class SceneNode : public sf::Transformable, public sf::Drawable, private sf::NonCopyable
 {
     public:
         typedef std::unique_ptr<SceneNode> Ptr;
+
+        enum Layer
+        {
+            Background,
+            Air,
+            LayerCount
+        };
+
     public:
         SceneNode();
 
-        void    attachCild(Ptr Child);
+        void    attachChild(Ptr Child);
         Ptr     detachChild(const SceneNode& node);
+        void    update(sf::Time dt);
+
+        sf::Transform getWorldTransform() const;
+        sf::Vector2f getWorldPosition() const;
+
     private:
         std::vector<Ptr>    mChildren;
         SceneNode*          mParent;
@@ -20,6 +34,9 @@ class SceneNode : public sf::Transformable, public sf::Drawable, private sf::Non
     private:
         virtual void    draw(sf::RenderTarget& target, sf::RenderStates states) const final;
         virtual void    drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
+
+        virtual void    updateCurrent(sf::Time dt);
+        void            updateChildren(sf::Time dt);
 };
 
 #endif // SCENENODE_H

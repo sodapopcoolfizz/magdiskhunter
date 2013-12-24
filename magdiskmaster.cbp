@@ -52,12 +52,17 @@
 		<Unit filename="include/Entity.h" />
 		<Unit filename="include/Game.hpp" />
 		<Unit filename="include/ResourceHolder.hpp" />
+		<Unit filename="include/ResourceIdentifiers.hpp" />
 		<Unit filename="include/SceneNode.h" />
+		<Unit filename="include/SpriteNode.h" />
+		<Unit filename="include/World.h" />
 		<Unit filename="src/Aircraft.cpp" />
 		<Unit filename="src/Entity.cpp" />
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/ResourceHolder.inl" />
 		<Unit filename="src/SceneNode.cpp" />
+		<Unit filename="src/SpriteNode.cpp" />
+		<Unit filename="src/World.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

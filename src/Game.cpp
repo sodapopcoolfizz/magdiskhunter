@@ -7,6 +7,7 @@ const sf::Time TimePerFrame = sf::seconds(1.f/60.f);
 
 
 Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML APPLICATION"), mPlayer(), mIsMovingDown(false), mIsMovingLeft(false), mIsMovingRight(false), mIsMovingUp(false)
+, mWorld(mWindow)
 {
 
     /***if(!mTexture.loadFromFile("../../Media/Textures/UMagnet.png"))
@@ -22,13 +23,13 @@ void Game::run()
 
     ResourceHolder<sf::Texture,Textures::ID> textures;
     try{
-        textures.load(Textures::Airplane,"../../Media/Textures/UMagnet.png");
+        textures.load(Textures::Umag,"../../Media/Textures/UMagnet.png");
     }
     catch (std::runtime_error& e)
 	{
 		std::cout << "Exception: " << e.what() << std::endl;
 	}
-    mPlayer.setTexture(textures.get(Textures::Airplane));
+    mPlayer.setTexture(textures.get(Textures::Umag));
     mPlayer.setPosition(100.f,100.f);
 
 
@@ -93,12 +94,15 @@ void Game::update(sf::Time deltaTime)
     if (mIsMovingRight)
         movement.x +=playerSpeed;
     mPlayer.move(movement * deltaTime.asSeconds());
+    mWorld.update(deltaTime);
 }
 
 void Game::render()
 {
     mWindow.clear();
-    mWindow.draw(mPlayer);
+    mWorld.draw();
+    mWindow.setView(mWindow.getDefaultView());
+
     mWindow.display();
 }
 
