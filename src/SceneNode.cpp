@@ -70,7 +70,25 @@ sf::Transform SceneNode::getWorldTransform() const
     }
 }
 
+unsigned int SceneNode::getCategory() const
+{
+    return Category::Scene;
+}
+
 sf::Vector2f SceneNode::getWorldPosition() const
 {
     return getWorldTransform() * sf::Vector2f();
+}
+
+void SceneNode::onCommand(const Command& command, sf::Time dt)
+{
+    if  (command.category & getCategory())
+    {
+        command.action(*this, dt);
+    }
+
+    for(auto itr = mChildren.begin(); itr!=mChildren.end(); ++itr)
+    {
+        (*itr)->onCommand(command, dt);
+    }
 }

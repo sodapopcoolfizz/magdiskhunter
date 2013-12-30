@@ -19,6 +19,7 @@ void World::loadTextures()
 {
     mTextures.load(Textures::Umag, "../../Media/Textures/UMagnet.png");
     mTextures.load(Textures::Desert, "../../Media/Textures/Desert.png");
+    mTextures.load(Textures::Orb, "../../Media/Textures/Orb.png");
 }
 
 void World::buildScene()
@@ -49,11 +50,11 @@ void World::buildScene()
     mPlayerAircraft->setVelocity(40.f, mScrollSpeed);
     mSceneLayers[Air]->attachChild(std::move(leader));
 
-    std::unique_ptr<Aircraft> escortLeft(new Aircraft(Aircraft::Umag, mTextures));
+    std::unique_ptr<Aircraft> escortLeft(new Aircraft(Aircraft::Orb, mTextures));
     escortLeft->setPosition(-80.f,50.f);
     mPlayerAircraft->attachChild(std::move(escortLeft));
 
-    std::unique_ptr<Aircraft> escortRight(new Aircraft(Aircraft::Umag, mTextures));
+    std::unique_ptr<Aircraft> escortRight(new Aircraft(Aircraft::Orb, mTextures));
     escortRight->setPosition(80.f,50.f);
     mPlayerAircraft->attachChild(std::move(escortRight));
 }
@@ -67,17 +68,38 @@ void World::draw()
 void World::update(sf::Time dt)
 {
     mWorldView.move(0.f, mScrollSpeed * dt.asSeconds());
+    mPlayerAircraft->setVelocity(0.f,0.f);
 
-    sf::Vector2f position = mPlayerAircraft->getPosition();
+    // envoyer les commandes au graph de scene
+    while(!mQueue.isEmpty())
+    {
+        mSceneGraph.onCommand(mQueue.pop(), dt);
+    }
+
     sf::Vector2f velocity = mPlayerAircraft->getVelocity();
 
-    if (position.x <= mWorldBounds.left + 150 || position.x >= mWorldBounds.left + mWorldBounds.width -150)
-    {
-        velocity.x = -velocity.x;
-        mPlayerAircraft->setVelocity(velocity);
-    }
+    // adapt velocity if moving diagonnaly
+    if(velocity.x != 0.f && velocity.y !=0.f)
+        mPlayerAircraft->setVelocity(velocity/std::sqrt(2.f));
+
+    mPlayerAircraft->accelerate(sf::Vector2f(0.f,mScrollSpeed));
     // applique les vélocités sur le reste des noeuds
     mSceneGraph.update(dt);
+
+    sf::FloatRect viewBounds(mWorldView.getCenter() - mWorldView.getSize() / 2.f, mWorldView.getSize());
+
+    const float borderDistance = 40.f;
+
+	sf::Vector2f position = mPlayerAircraft->getPosition();
+	position.x = std::max(position.x, viewBounds.left + borderDistance);
+	position.x = std::min(position.x, viewBounds.left + viewBounds.width - borderDistance);
+	position.y = std::max(position.y, viewBounds.top + borderDistance);
+	position.y = std::min(position.y, viewBounds.top + viewBounds.height - borderDistance);
+	mPlayerAircraft->setPosition(position);
 }
 
+CommandQueue& World::getCommandQueue()
+{
+    return mQueue;
+}
 

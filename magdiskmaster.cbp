@@ -49,16 +49,23 @@
 			<Add directory="/usr/local/lib/" />
 		</Linker>
 		<Unit filename="include/Aircraft.h" />
+		<Unit filename="include/Category.hpp" />
+		<Unit filename="include/Command.hpp" />
+		<Unit filename="include/CommandQueue.h" />
 		<Unit filename="include/Entity.h" />
 		<Unit filename="include/Game.hpp" />
+		<Unit filename="include/Player.h" />
 		<Unit filename="include/ResourceHolder.hpp" />
 		<Unit filename="include/ResourceIdentifiers.hpp" />
 		<Unit filename="include/SceneNode.h" />
 		<Unit filename="include/SpriteNode.h" />
 		<Unit filename="include/World.h" />
 		<Unit filename="src/Aircraft.cpp" />
+		<Unit filename="src/Command.cpp" />
+		<Unit filename="src/CommandQueue.cpp" />
 		<Unit filename="src/Entity.cpp" />
 		<Unit filename="src/Game.cpp" />
+		<Unit filename="src/Player.cpp" />
 		<Unit filename="src/ResourceHolder.inl" />
 		<Unit filename="src/SceneNode.cpp" />
 		<Unit filename="src/SpriteNode.cpp" />

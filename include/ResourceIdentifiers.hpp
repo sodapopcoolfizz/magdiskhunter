@@ -10,6 +10,7 @@ namespace Textures
         Desert,
         Umag,
         Disk,
+        Orb,
     };
 
 }

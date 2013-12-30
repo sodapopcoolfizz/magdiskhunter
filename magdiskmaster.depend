@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1387823543 source:/home/vincent/magdiskmaster/src/Game.cpp
+1388227768 source:/home/vincent/magdiskmaster/src/Game.cpp
 	"ResourceHolder.hpp"
 	"Game.hpp"
 
@@ -700,29 +700,33 @@
 	<cassert>
 	"../src/ResourceHolder.inl"
 
-1387822856 /home/vincent/magdiskmaster/include/Game.hpp
+1388224314 /home/vincent/magdiskmaster/include/Game.hpp
 	<SFML/Graphics.hpp>
 	<iostream>
 	"World.h"
+	"Player.h"
 
-1387819426 /home/vincent/magdiskmaster/include/SceneNode.h
+1388224540 /home/vincent/magdiskmaster/include/SceneNode.h
 	<memory>
 	<vector>
 	"SFML/Graphics.hpp"
+	"Command.hpp"
+	"Category.hpp"
 
-1387618321 source:/home/vincent/magdiskmaster/src/Aircraft.cpp
+1388228450 source:/home/vincent/magdiskmaster/src/Aircraft.cpp
 	"Aircraft.h"
 
-1387617833 /home/vincent/magdiskmaster/include/Aircraft.h
+1388228398 /home/vincent/magdiskmaster/include/Aircraft.h
 	"Entity.h"
 	"ResourceHolder.hpp"
 	"ResourceIdentifiers.hpp"
+	"Category.hpp"
 
-1387819418 source:/home/vincent/magdiskmaster/src/SceneNode.cpp
+1388159350 source:/home/vincent/magdiskmaster/src/SceneNode.cpp
 	"SceneNode.h"
 	<cassert>
 
-1387819450 /home/vincent/magdiskmaster/include/ResourceIdentifiers.hpp
+1387883501 /home/vincent/magdiskmaster/include/ResourceIdentifiers.hpp
 	"ResourceHolder.hpp"
 
 1387809019 source:/home/vincent/magdiskmaster/src/SpriteNode.cpp
@@ -731,8 +735,9 @@
 1387808679 /home/vincent/magdiskmaster/include/SpriteNode.h
 	"SceneNode.h"
 
-1387819479 /home/vincent/magdiskmaster/include/World.h
+1388235153 /home/vincent/magdiskmaster/include/World.h
 	<array>
+	<cmath>
 	"SFML/System.hpp"
 	"SFML/Graphics.hpp"
 	"SceneNode.h"
@@ -740,7 +745,37 @@
 	"ResourceHolder.hpp"
 	"Aircraft.h"
 	"SpriteNode.h"
+	"CommandQueue.h"
 
-1387823188 source:/home/vincent/magdiskmaster/src/World.cpp
+1388235301 source:/home/vincent/magdiskmaster/src/World.cpp
 	"World.h"
+
+1388235209 /home/vincent/magdiskmaster/include/Command.hpp
+	<SFML/System/Time.hpp>
+	<functional>
+	"Category.hpp"
+	<cassert>
+
+1388223985 /home/vincent/magdiskmaster/include/Category.hpp
+
+1388232293 source:/home/vincent/magdiskmaster/src/Command.cpp
+	"Command.hpp"
+
+1388224224 source:/home/vincent/magdiskmaster/src/CommandQueue.cpp
+	"CommandQueue.h"
+
+1388159749 /home/vincent/magdiskmaster/include/CommandQueue.h
+	<queue>
+	"Command.hpp"
+
+1388418664 /home/vincent/magdiskmaster/include/Player.h
+	"CommandQueue.h"
+	"SFML/Window/Event.hpp"
+	"SFML/System/Vector2.hpp"
+	"Aircraft.h"
+	<map>
+
+1388419123 source:/home/vincent/magdiskmaster/src/Player.cpp
+	"Player.h"
+	<iostream>
 

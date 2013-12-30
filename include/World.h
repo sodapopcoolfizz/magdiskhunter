@@ -2,6 +2,7 @@
 #define WORLD_H
 
 #include <array>
+#include <cmath>
 
 #include "SFML/System.hpp"
 #include "SFML/Graphics.hpp"
@@ -10,6 +11,7 @@
 #include "ResourceHolder.hpp"
 #include "Aircraft.h"
 #include "SpriteNode.h"
+#include "CommandQueue.h"
 
 
 
@@ -19,6 +21,7 @@ class World : private sf::NonCopyable
         explicit    World(sf::RenderWindow& window);
         void        update(sf::Time dt);
         void        draw();
+        CommandQueue& getCommandQueue();
 
     private:
         void        loadTextures();
@@ -43,6 +46,7 @@ class World : private sf::NonCopyable
         sf::Vector2f            mSpawnPosition;
         float                   mScrollSpeed;
         Aircraft*               mPlayerAircraft;
+        CommandQueue            mQueue;
 
 
 };

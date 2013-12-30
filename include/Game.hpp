@@ -4,6 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "World.h"
+#include "Player.h"
+
 class Game
 {
     public:
@@ -19,12 +21,9 @@ class Game
 
     private:
         sf::RenderWindow mWindow;
-        sf::Sprite mPlayer;
+        Player mPlayer;
         sf::Texture mTexture;
-        bool mIsMovingDown;
-        bool mIsMovingLeft;
-        bool mIsMovingRight;
-        bool mIsMovingUp;
+        bool mIsPaused;
         World mWorld;
 
 

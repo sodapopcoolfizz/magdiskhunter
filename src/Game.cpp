@@ -6,33 +6,13 @@ const sf::Time TimePerFrame = sf::seconds(1.f/60.f);
 
 
 
-Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML APPLICATION"), mPlayer(), mIsMovingDown(false), mIsMovingLeft(false), mIsMovingRight(false), mIsMovingUp(false)
+Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML APPLICATION"), mPlayer(), mIsPaused(false)
 , mWorld(mWindow)
 {
-
-    /***if(!mTexture.loadFromFile("../../Media/Textures/UMagnet.png"))
-    {
-        // Handle loading error
-        std::cerr<<"Error while loading Texture";
-    }*/
-
 }
 
 void Game::run()
 {
-
-    ResourceHolder<sf::Texture,Textures::ID> textures;
-    try{
-        textures.load(Textures::Umag,"../../Media/Textures/UMagnet.png");
-    }
-    catch (std::runtime_error& e)
-	{
-		std::cout << "Exception: " << e.what() << std::endl;
-	}
-    mPlayer.setTexture(textures.get(Textures::Umag));
-    mPlayer.setPosition(100.f,100.f);
-
-
     sf::Clock clock;
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
     while(mWindow.isOpen())
@@ -42,7 +22,10 @@ void Game::run()
         {
             timeSinceLastUpdate-=TimePerFrame;
             processEvents();
-            update(TimePerFrame);
+            if(!mIsPaused)
+            {
+                update(TimePerFrame);
+            }
         }
         render();
     }
@@ -50,50 +33,35 @@ void Game::run()
 
 void Game::processEvents()
 {
+    CommandQueue& commands = mWorld.getCommandQueue();
+
     sf::Event event;
     while(mWindow.pollEvent(event))
     {
-        switch (event.type)
-        {
-            case sf::Event::KeyPressed:
-                handlePlayerInput(event.key.code, true);
-                break;
-            case sf::Event::KeyReleased:
-                handlePlayerInput(event.key.code, false);
-                break;
-            case sf::Event::Closed:
-                mWindow.close();
-                break;
-            default :
-                break;
-        }
+        mPlayer.handleEvent(event,commands);
+        if (event.type == sf::Event::GainedFocus)
+            mIsPaused = false;
+        else if (event.type == sf::Event::LostFocus)
+            mIsPaused = true;
+        else if (event.type == sf::Event::Closed)
+            mWindow.close();
     }
+
+    mPlayer.handleRealtimeInput(commands);
 }
 
-void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
-{
-    if (key == sf::Keyboard::Z)
-         mIsMovingUp = isPressed;
-    else if (key == sf::Keyboard::S)
-        mIsMovingDown = isPressed;
-    else if (key == sf::Keyboard::Q)
-        mIsMovingLeft = isPressed;
-    else if (key == sf::Keyboard::D)
-        mIsMovingRight = isPressed;
-}
 
 void Game::update(sf::Time deltaTime)
 {
     sf::Vector2f movement(0.f,0.f);
-    if (mIsMovingUp)
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
         movement.y -=playerSpeed;
-    if (mIsMovingDown)
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
         movement.y +=playerSpeed;
-    if (mIsMovingLeft)
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
         movement.x -=playerSpeed;
-    if (mIsMovingRight)
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         movement.x +=playerSpeed;
-    mPlayer.move(movement * deltaTime.asSeconds());
     mWorld.update(deltaTime);
 }
 
