@@ -11,10 +11,21 @@ namespace Textures
         Umag,
         Disk,
         Orb,
+        TitleScreen
     };
 
 }
 
+namespace Fonts
+{
+    enum ID
+    {
+        Main,
+        dialog,
+    };
+}
+
 typedef ResourceHolder<sf::Texture, Textures::ID> TextureHolder;
+typedef ResourceHolder<sf::Font, Fonts::ID> FontHolder;
 
 #endif // RESOURCEIDENTIFIERS_HPP_INCLUDED

@@ -685,7 +685,7 @@
 
 1387014727 /home/vincent/magdiskmaster/src/ResourceHolder.inl
 
-1387620208 source:/home/vincent/magdiskmaster/src/Entity.cpp
+1388419643 source:/home/vincent/magdiskmaster/src/Entity.cpp
 	"Entity.h"
 
 1387620145 /home/vincent/magdiskmaster/include/Entity.h
@@ -726,7 +726,7 @@
 	"SceneNode.h"
 	<cassert>
 
-1387883501 /home/vincent/magdiskmaster/include/ResourceIdentifiers.hpp
+1388875058 /home/vincent/magdiskmaster/include/ResourceIdentifiers.hpp
 	"ResourceHolder.hpp"
 
 1387809019 source:/home/vincent/magdiskmaster/src/SpriteNode.cpp
@@ -778,4 +778,25 @@
 1388419123 source:/home/vincent/magdiskmaster/src/Player.cpp
 	"Player.h"
 	<iostream>
+
+1388674642 source:/home/vincent/magdiskmaster/src/State.cpp
+	"State.h"
+	"StateStack.h"
+
+1388675678 /home/vincent/magdiskmaster/include/State.h
+	"StateIdentifiers.hpp"
+	"ResourceHolder.hpp"
+	"Player.h"
+	"SFML/Graphics.hpp"
+	<functional>
+
+1388874885 /home/vincent/magdiskmaster/include/StateIdentifiers.hpp
+
+1388676138 /home/vincent/magdiskmaster/include/StateStack.h
+	"State.h"
+	"SFML/System/NonCopyable.hpp"
+	<map>
+
+1388676261 source:/home/vincent/magdiskmaster/src/StateStack.cpp
+	"StateStack.h"
 
