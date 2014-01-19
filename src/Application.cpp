@@ -2,18 +2,20 @@
 #include "TitleState.h"
 #include "GameState.h"
 #include "PauseState.h"
+#include "MenuState.h"
+#include "StateStack.h"
 
 const sf::Time Application::TimePerFrame = sf::seconds(1.f/60.f);
 
 Application::Application()
-: mWindow(sf::VideoMode(640, 480), "States", sf::Style::Close)
+: mWindow(sf::VideoMode(640, 480), "Mag Disk Hunter", sf::Style::Close)
 , mTextures()
 , mFonts()
 , mPlayer()
 , mStateStack(State::Context(mWindow, mTextures, mFonts, mPlayer))
 {
-    mFonts.load(Fonts::Main, "Media/Sansation.ttf");
-    mTextures.load(Textures::TitleScreen, "Media/Textures/TitleScreen.png");
+    mFonts.load(Fonts::Main, "../../Media/alphbeta.ttf");
+    mTextures.load(Textures::TitleScreen, "../../Media/Textures/TitleScreen.png");
 
     registerStates();
     mStateStack.pushState(States::Title);
@@ -64,7 +66,7 @@ void Application::run()
     while(mWindow.isOpen())
     {
         sf::Time dt = clock.restart();
-        timeSinceLastUpdate +=dt:
+        timeSinceLastUpdate +=dt;
         while(timeSinceLastUpdate > TimePerFrame)
         {
             timeSinceLastUpdate -=TimePerFrame;

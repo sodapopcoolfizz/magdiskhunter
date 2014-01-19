@@ -17,6 +17,8 @@ class Player
             MoveRight,
             MoveUp,
             MoveDown,
+            Fire,
+            LaunchMissile,
         };
 
         Player();

@@ -5,6 +5,9 @@
 #include "ResourceHolder.hpp"
 #include "ResourceIdentifiers.hpp"
 #include "Category.hpp"
+#include "TextNode.h"
+#include "CommandQueue.h"
+#include "Projectile.h"
 
 class Aircraft : public Entity
 {
@@ -13,16 +16,46 @@ class Aircraft : public Entity
         {
             Umag,
             Disk,
-            Orb
+            Orb,
+            TypeCount,
         };
     public:
-        explicit    Aircraft(Type type, const TextureHolder& textures);
+        explicit    Aircraft(Type type, const TextureHolder& textures, const FontHolder& fonts);
         virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
         virtual unsigned int getCategory() const;
         void accelerate(sf::Vector2f velocity);
+        float getMaxSpeed() const;
+
+
+        void updateTexts();
+        void updateMovementPatterns(sf::Time dt);
+        virtual void updateCurrent(sf::Time dt, CommandQueue& commands);
+        void checkProjectileLaunch(sf::Time dt, CommandQueue& commands);
+        void fire();
+        void LaunchMissile();
+        bool isAllied() const;
+        void collectMissiles(unsigned int count);
+
+
     private:
+        void createBullets(SceneNode& node, const TextureHolder& textures) const;
+        void createProjectile(SceneNode& node, Projectile::Type, float xOffset, float yOffset, const TextureHolder& textures) const;
+
+
         Type    mType;
         sf::Sprite  mSprite;
+        TextNode* mHealthDisplay;
+
+        float mTravelledDistance;
+		std::size_t mDirectionIndex;
+		bool mIsLaunchingMissile;
+		bool mIsFiring;
+		sf::Time mFireCountdown;
+		Command mFireCommand;
+		Command mMissileCommand;
+		int mSpreadLevel;
+		int mFireRateLevel;
+		int mMissileAmmo;
 
 };
 

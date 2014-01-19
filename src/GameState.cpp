@@ -2,8 +2,8 @@
 
 GameState::GameState(StateStack& sstack, Context context)
 : State(sstack, context)
-, mWorld(*context.window)
-, mPlayer(*context.player)
+, mWorld(*context.mWindow)
+, mPlayer(*context.mPlayer)
 {
 }
 

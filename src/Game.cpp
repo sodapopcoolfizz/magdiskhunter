@@ -53,7 +53,7 @@ void Game::processEvents()
 
 void Game::update(sf::Time deltaTime)
 {
-    sf::Vector2f movement(0.f,0.f);
+    /*sf::Vector2f movement(0.f,0.f);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
         movement.y -=playerSpeed;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
@@ -61,7 +61,7 @@ void Game::update(sf::Time deltaTime)
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
         movement.x -=playerSpeed;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-        movement.x +=playerSpeed;
+        movement.x +=playerSpeed;*/
     mWorld.update(deltaTime);
 }
 

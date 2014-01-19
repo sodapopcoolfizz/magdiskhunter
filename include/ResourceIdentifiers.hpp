@@ -2,6 +2,8 @@
 #define RESOURCEIDENTIFIERS_HPP_INCLUDED
 
 #include "ResourceHolder.hpp"
+#include "SFML/Graphics/Texture.hpp"
+#include "SFML/Graphics/Font.hpp"
 
 namespace Textures
 {
@@ -11,7 +13,9 @@ namespace Textures
         Umag,
         Disk,
         Orb,
-        TitleScreen
+        TitleScreen,
+        Bullet,
+        Missile,
     };
 
 }

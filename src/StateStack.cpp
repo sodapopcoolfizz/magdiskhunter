@@ -1,13 +1,14 @@
 #include "StateStack.h"
 
-template <typename T>
-void StateStack::registerState(States::ID stateID)
+StateStack::StateStack(State::Context context)
+: mStack()
+, mPendingList()
+, mContext(context)
+, mFactories()
 {
-    mFactories[stateID] = [this] ()
-    {
-        return State::Ptr(new T(*this,mContext));
-    };
 }
+
+
 
 State::Ptr StateStack::createState(States::ID stateID)
 {

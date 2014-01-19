@@ -1,9 +1,8 @@
 #include "SceneNode.h"
 #include <cassert>
 
-SceneNode::SceneNode()
+SceneNode::SceneNode(Category::Type category) : mChildren(), mParent(nullptr), mDefaultCategory(category)
 {
-    mParent = nullptr;
 }
 
 void SceneNode::attachChild(Ptr child)
@@ -26,21 +25,21 @@ SceneNode::Ptr SceneNode::detachChild(const SceneNode& node)
 
 }
 
-void SceneNode::update(sf::Time dt)
+void SceneNode::update(sf::Time dt, CommandQueue& commands)
 {
-    updateCurrent(dt);
-    updateChildren(dt);
+    updateCurrent(dt, commands);
+    updateChildren(dt, commands);
 }
 
-void SceneNode::updateChildren(sf::Time dt)
+void SceneNode::updateChildren(sf::Time dt, CommandQueue& commands)
 {
     for(auto itr = mChildren.begin(); itr!=mChildren.end(); ++itr)
     {
-        (*itr)->update(dt);
+        (*itr)->update(dt, commands);
     }
 }
 
-void SceneNode::updateCurrent(sf::Time dt)
+void SceneNode::updateCurrent(sf::Time dt, CommandQueue& commands)
 {
 }
 
@@ -68,11 +67,12 @@ sf::Transform SceneNode::getWorldTransform() const
     {
         trans = node->getTransform() * trans;
     }
+    return trans;
 }
 
 unsigned int SceneNode::getCategory() const
 {
-    return Category::Scene;
+    return mDefaultCategory;
 }
 
 sf::Vector2f SceneNode::getWorldPosition() const

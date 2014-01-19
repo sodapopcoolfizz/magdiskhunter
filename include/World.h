@@ -12,6 +12,7 @@
 #include "Aircraft.h"
 #include "SpriteNode.h"
 #include "CommandQueue.h"
+#include "utils.hpp"
 
 
 
@@ -23,9 +24,17 @@ class World : private sf::NonCopyable
         void        draw();
         CommandQueue& getCommandQueue();
 
+
     private:
         void        loadTextures();
+        void        loadFonts();
         void        buildScene();
+        sf::FloatRect getBattlefieldBounds() const;
+        sf::FloatRect getViewBounds() const;
+
+        void spawnEnemies();
+        void addEnemies();
+		void addEnemy(Aircraft::Type type, float relX, float relY);
 
     private:
         enum Layer
@@ -35,10 +44,21 @@ class World : private sf::NonCopyable
             LayerCount
         };
 
+    struct SpawnPoint
+    {
+        SpawnPoint(Aircraft::Type type, float x, float y): mType(type), mx(x), my(y)
+        {}
+
+        Aircraft::Type mType;
+        float mx;
+        float my;
+    };
+
     private:
         sf::RenderWindow&       mWindow;
         sf::View                mWorldView;
         TextureHolder           mTextures;
+        FontHolder              mFonts;
         SceneNode               mSceneGraph;
         std::array<SceneNode*, LayerCount> mSceneLayers;
 
@@ -47,6 +67,8 @@ class World : private sf::NonCopyable
         float                   mScrollSpeed;
         Aircraft*               mPlayerAircraft;
         CommandQueue            mQueue;
+
+        std::vector<SpawnPoint> mEnemySpawnPoints;
 
 
 };

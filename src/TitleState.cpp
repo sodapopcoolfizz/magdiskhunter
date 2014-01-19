@@ -1,4 +1,5 @@
 #include "TitleState.h"
+#include "utils.hpp"
 
 TitleState::TitleState(StateStack& sstack, Context context)
 : State(sstack,context)
@@ -6,17 +7,17 @@ TitleState::TitleState(StateStack& sstack, Context context)
 , mShowText(true)
 , mTextEffectTime(sf::Time::Zero)
 {
-    mBackgroundSprite.setTexture(context.textures->get(Textures::TitleScreen));
+    mBackgroundSprite.setTexture(context.mTextures->get(Textures::TitleScreen));
 
-    mText.setFont(context.fonts->get(Fonts::Main));
+    mText.setFont(context.mFonts->get(Fonts::Main));
     mText.setString("Press any key to start");
-
-    mText.setPosition(context.window->getView().getSize()/2.f);
+    centerOrigin(mText);
+    mText.setPosition(context.mWindow->getView().getSize()/2.f);
 }
 
 void TitleState::draw()
 {
-    sf::RenderWindow& window = *getContext().window;
+    sf::RenderWindow& window = *getContext().mWindow;
     window.draw(mBackgroundSprite);
 
     if(mShowText)
@@ -32,6 +33,7 @@ bool TitleState::update(sf::Time dt)
         mShowText = !mShowText;
         mTextEffectTime = sf::Time::Zero;
     }
+    return true;
 }
 
 bool TitleState::handleEvent(const sf::Event& event)

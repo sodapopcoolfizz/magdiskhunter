@@ -3,7 +3,7 @@
 
 #include "State.h"
 
-class TitleState
+class TitleState : public State
 {
     public:
         TitleState(StateStack& sstack, Context context);

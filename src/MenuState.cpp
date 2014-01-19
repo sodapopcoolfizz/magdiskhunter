@@ -1,25 +1,27 @@
 #include "MenuState.h"
+#include "utils.hpp"
 
 MenuState::MenuState(StateStack& sstack, Context context)
-: mState(sstack,context)
+: State(sstack,context)
 , mOptions()
 , mOptionIndex(0)
 {
-    sf::Texture& texture = context.textures->get(Textures::TitleScreen);
-    sf::Font& font = context.fonts->get(Fonts::Main);
+    sf::Texture& texture = context.mTextures->get(Textures::TitleScreen);
+    sf::Font& font = context.mFonts->get(Fonts::Main);
 
     mBackgroundSprite.setTexture(texture);
 
     sf::Text playOption;
     playOption.setFont(font);
     playOption.setString("Play");
-    playOption.setPosition(context.window->getView().getSize() / 2.f);
+    centerOrigin(playOption);
+    playOption.setPosition(context.mWindow->getView().getSize() / 2.f);
     mOptions.push_back(playOption);
 
     sf::Text exitOption;
 	exitOption.setFont(font);
 	exitOption.setString("Exit");
-	centerOrigin(exitOption);
+    centerOrigin(exitOption);
 	exitOption.setPosition(playOption.getPosition() + sf::Vector2f(0.f, 30.f));
 	mOptions.push_back(exitOption);
 
@@ -28,7 +30,7 @@ MenuState::MenuState(StateStack& sstack, Context context)
 
 void MenuState::draw()
 {
-    sf::RenderWindow& window = *getContext().window;
+    sf::RenderWindow& window = *getContext().mWindow;
 
     window.setView(window.getDefaultView());
     window.draw(mBackgroundSprite);
@@ -46,7 +48,11 @@ bool MenuState::update(sf::Time)
 
 bool MenuState::handleEvent(const sf::Event& event)
 {
-    if(event.key.cpde == sf::Keyboard::Return)
+
+    if (event.type != sf::Event::KeyPressed)
+		return true;
+
+    if(event.key.code == sf::Keyboard::Return)
     {
         if(mOptionIndex == Play)
         {
@@ -64,7 +70,7 @@ bool MenuState::handleEvent(const sf::Event& event)
     {
         if(mOptionIndex > 0)
         {
-            mOptionIndex--:
+            mOptionIndex--;
         }
         else
         {
@@ -102,6 +108,6 @@ void MenuState::updateOptionText()
      }
 
      // Selected is blue
-     mOptions[mOptinIndex].setColor(sf::Color::Blue);
+     mOptions[mOptionIndex].setColor(sf::Color(86, 204, 141));
 }
 

@@ -5,6 +5,7 @@
 		<Option title="magdiskmaster" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
+		<Option virtualFolders="include/;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/magdiskmaster" prefix_auto="1" extension_auto="1" />
@@ -53,12 +54,14 @@
 		<Unit filename="include/Category.hpp" />
 		<Unit filename="include/Command.hpp" />
 		<Unit filename="include/CommandQueue.h" />
+		<Unit filename="include/DataTables.hpp" />
 		<Unit filename="include/Entity.h" />
 		<Unit filename="include/Game.hpp" />
 		<Unit filename="include/GameState.h" />
 		<Unit filename="include/MenuState.h" />
 		<Unit filename="include/PauseState.h" />
 		<Unit filename="include/Player.h" />
+		<Unit filename="include/Projectile.h" />
 		<Unit filename="include/ResourceHolder.hpp" />
 		<Unit filename="include/ResourceIdentifiers.hpp" />
 		<Unit filename="include/SceneNode.h" />
@@ -66,25 +69,33 @@
 		<Unit filename="include/State.h" />
 		<Unit filename="include/StateIdentifiers.hpp" />
 		<Unit filename="include/StateStack.h" />
+		<Unit filename="include/TextNode.h" />
 		<Unit filename="include/TitleState.h" />
 		<Unit filename="include/World.h" />
+		<Unit filename="include/utils.hpp" />
 		<Unit filename="src/Aircraft.cpp" />
 		<Unit filename="src/Application.cpp" />
 		<Unit filename="src/Command.cpp" />
 		<Unit filename="src/CommandQueue.cpp" />
+		<Unit filename="src/DataTables.cpp" />
 		<Unit filename="src/Entity.cpp" />
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/GameState.cpp" />
+		<Unit filename="src/Main.cpp" />
 		<Unit filename="src/MenuState.cpp" />
 		<Unit filename="src/PauseState.cpp" />
 		<Unit filename="src/Player.cpp" />
+		<Unit filename="src/Projectile.cpp" />
 		<Unit filename="src/ResourceHolder.inl" />
 		<Unit filename="src/SceneNode.cpp" />
 		<Unit filename="src/SpriteNode.cpp" />
 		<Unit filename="src/State.cpp" />
 		<Unit filename="src/StateStack.cpp" />
+		<Unit filename="src/TextNode.cpp" />
 		<Unit filename="src/TitleState.cpp" />
 		<Unit filename="src/World.cpp" />
+		<Unit filename="src/utils.cpp" />
+		<Unit filename="src/utils.inl" />
 		<Extensions>
 			<code_completion />
 			<debugger />
