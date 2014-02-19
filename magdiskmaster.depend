@@ -737,10 +737,11 @@
 	"utils.hpp"
 	"iostream"
 
-1392764372 /home/vincent/magdiskmaster/include/ResourceIdentifiers.hpp
+1392845005 /home/vincent/magdiskmaster/include/ResourceIdentifiers.hpp
 	"ResourceHolder.hpp"
 	"SFML/Graphics/Texture.hpp"
 	"SFML/Graphics/Font.hpp"
+	"SFML/Audio/SoundBuffer.hpp"
 
 1391941166 source:/home/vincent/magdiskmaster/src/SpriteNode.cpp
 	"SpriteNode.h"
@@ -799,16 +800,17 @@
 	<iostream>
 	<functional>
 
-1392764822 source:/home/vincent/magdiskmaster/src/State.cpp
+1392844771 source:/home/vincent/magdiskmaster/src/State.cpp
 	"State.h"
 	"StateStack.h"
 
-1392765068 /home/vincent/magdiskmaster/include/State.h
+1392845232 /home/vincent/magdiskmaster/include/State.h
 	"StateIdentifiers.hpp"
 	"ResourceHolder.hpp"
 	"Player.h"
 	"SFML/Graphics.hpp"
 	"MusicPlayer.h"
+	"SoundPlayer.h"
 	<functional>
 
 1388874885 /home/vincent/magdiskmaster/include/StateIdentifiers.hpp
@@ -821,7 +823,7 @@
 1389454142 source:/home/vincent/magdiskmaster/src/StateStack.cpp
 	"StateStack.h"
 
-1392764919 source:/home/vincent/magdiskmaster/src/Application.cpp
+1392845253 source:/home/vincent/magdiskmaster/src/Application.cpp
 	"Application.h"
 	"TitleState.h"
 	"GameState.h"
@@ -829,11 +831,12 @@
 	"MenuState.h"
 	"StateStack.h"
 
-1392764979 /home/vincent/magdiskmaster/include/Application.h
+1392844837 /home/vincent/magdiskmaster/include/Application.h
 	"StateStack.h"
 	"StateIdentifiers.hpp"
 	"ResourceIdentifiers.hpp"
 	"MusicPlayer.h"
+	"SoundPlayer.h"
 
 1389452788 /home/vincent/magdiskmaster/include/TitleState.h
 	"State.h"
@@ -853,7 +856,7 @@
 	"GameState.h"
 	"ResourceIdentifiers.hpp"
 
-1392764157 source:/home/vincent/magdiskmaster/src/MenuState.cpp
+1392845143 source:/home/vincent/magdiskmaster/src/MenuState.cpp
 	"MenuState.h"
 	"utils.hpp"
 	"ResourceIdentifiers.hpp"
@@ -1006,4 +1009,13 @@
 1392764298 source:/home/vincent/magdiskmaster/src/MusicPlayer.cpp
 	"MusicPlayer.h"
 	"ResourceIdentifiers.hpp"
+
+1392845194 /home/vincent/magdiskmaster/include/SoundPlayer.h
+	<list>
+	"SFML/System/NonCopyable.hpp"
+	"SFML/Audio/Sound.hpp"
+	"ResourceIdentifiers.hpp"
+
+1392845300 source:/home/vincent/magdiskmaster/src/SoundPlayer.cpp
+	"SoundPlayer.h"
 

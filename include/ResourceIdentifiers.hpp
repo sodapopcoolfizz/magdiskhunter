@@ -4,6 +4,7 @@
 #include "ResourceHolder.hpp"
 #include "SFML/Graphics/Texture.hpp"
 #include "SFML/Graphics/Font.hpp"
+#include "SFML/Audio/SoundBuffer.hpp"
 
 namespace Textures
 {
@@ -40,7 +41,21 @@ namespace Music
         };
 }
 
+namespace SoundEffect
+{
+    enum ID
+    {
+        AlliedGunfire,
+        EnemyGunfire,
+        Explosion,
+        LaunchMissile,
+        CollectPickup,
+        Text,
+    };
+}
+
 typedef ResourceHolder<sf::Texture, Textures::ID> TextureHolder;
 typedef ResourceHolder<sf::Font, Fonts::ID> FontHolder;
+typedef ResourceHolder<sf::SoundBuffer, SoundEffect::ID> SoundBufferHolder;
 
 #endif // RESOURCEIDENTIFIERS_HPP_INCLUDED

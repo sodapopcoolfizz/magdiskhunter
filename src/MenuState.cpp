@@ -112,5 +112,6 @@ void MenuState::updateOptionText()
 
      // Selected is blue
      mOptions[mOptionIndex].setColor(sf::Color(86, 204, 141));
+     getContext().mSoundPlayer->play(SoundEffect::Text);
 }
 

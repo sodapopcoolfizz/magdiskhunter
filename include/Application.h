@@ -5,6 +5,7 @@
 #include "StateIdentifiers.hpp"
 #include "ResourceIdentifiers.hpp"
 #include "MusicPlayer.h"
+#include "SoundPlayer.h"
 
 class Application
 {
@@ -27,6 +28,7 @@ class Application
 	  	FontHolder				mFonts;
 		Player					mPlayer;
 		MusicPlayer             mMusic;
+		SoundPlayer             mSound;
 
 };
 

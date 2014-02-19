@@ -13,7 +13,8 @@ Application::Application()
 , mFonts()
 , mPlayer()
 , mMusic()
-, mStateStack(State::Context(mWindow, mTextures, mFonts, mPlayer,mMusic))
+, mSound()
+, mStateStack(State::Context(mWindow, mTextures, mFonts, mPlayer,mMusic,mSound))
 {
     mFonts.load(Fonts::Main, "../../Media/alphbeta.ttf");
     mTextures.load(Textures::TitleScreen, "../../Media/Textures/TitleScreen.png");

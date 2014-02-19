@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "SFML/Graphics.hpp"
 #include "MusicPlayer.h"
+#include "SoundPlayer.h"
 #include <functional>
 
 class StateStack;
@@ -20,13 +21,15 @@ class State
             TextureHolder& textures,
             FontHolder& fonts,
             Player& player,
-            MusicPlayer& music);
+            MusicPlayer& music,
+            SoundPlayer& sound);
 
             sf::RenderWindow* mWindow;
             TextureHolder* mTextures;
             FontHolder* mFonts;
             Player* mPlayer;
             MusicPlayer * mMusicPlayer;
+            SoundPlayer * mSoundPlayer;
 
         };
 
