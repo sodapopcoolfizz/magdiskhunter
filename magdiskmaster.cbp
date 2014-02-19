@@ -21,6 +21,7 @@
 					<Add library="sfml-system-d" />
 					<Add library="sfml-window-d" />
 					<Add library="sfml-graphics-d" />
+					<Add library="sfml-audio-d" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -47,8 +48,10 @@
 			<Add library="sfml-system" />
 			<Add library="sfml-window" />
 			<Add library="sfml-graphics" />
+			<Add library="sfml-audio" />
 			<Add directory="/usr/local/lib/" />
 		</Linker>
+		<Unit filename="Media/shader.frag" />
 		<Unit filename="include/Aircraft.h" />
 		<Unit filename="include/Application.h" />
 		<Unit filename="include/Category.hpp" />
@@ -59,12 +62,15 @@
 		<Unit filename="include/Game.hpp" />
 		<Unit filename="include/GameState.h" />
 		<Unit filename="include/MenuState.h" />
+		<Unit filename="include/MusicPlayer.h" />
 		<Unit filename="include/PauseState.h" />
+		<Unit filename="include/Pickup.h" />
 		<Unit filename="include/Player.h" />
 		<Unit filename="include/Projectile.h" />
 		<Unit filename="include/ResourceHolder.hpp" />
 		<Unit filename="include/ResourceIdentifiers.hpp" />
 		<Unit filename="include/SceneNode.h" />
+		<Unit filename="include/ShaderNode.h" />
 		<Unit filename="include/SpriteNode.h" />
 		<Unit filename="include/State.h" />
 		<Unit filename="include/StateIdentifiers.hpp" />
@@ -83,11 +89,14 @@
 		<Unit filename="src/GameState.cpp" />
 		<Unit filename="src/Main.cpp" />
 		<Unit filename="src/MenuState.cpp" />
+		<Unit filename="src/MusicPlayer.cpp" />
 		<Unit filename="src/PauseState.cpp" />
+		<Unit filename="src/Pickup.cpp" />
 		<Unit filename="src/Player.cpp" />
 		<Unit filename="src/Projectile.cpp" />
 		<Unit filename="src/ResourceHolder.inl" />
 		<Unit filename="src/SceneNode.cpp" />
+		<Unit filename="src/ShaderNode.cpp" />
 		<Unit filename="src/SpriteNode.cpp" />
 		<Unit filename="src/State.cpp" />
 		<Unit filename="src/StateStack.cpp" />

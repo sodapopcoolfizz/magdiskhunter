@@ -10,6 +10,7 @@
 #include "ResourceIdentifiers.hpp"
 #include "ResourceHolder.hpp"
 #include "Aircraft.h"
+#include "Pickup.h"
 #include "SpriteNode.h"
 #include "CommandQueue.h"
 #include "utils.hpp"
@@ -35,6 +36,12 @@ class World : private sf::NonCopyable
         void spawnEnemies();
         void addEnemies();
 		void addEnemy(Aircraft::Type type, float relX, float relY);
+
+		void guideMissiles();
+
+		void handleCollisions();
+
+		void destroyEntitiesOutsideView();
 
     private:
         enum Layer
@@ -69,9 +76,12 @@ class World : private sf::NonCopyable
         CommandQueue            mQueue;
 
         std::vector<SpawnPoint> mEnemySpawnPoints;
+        std::vector<Aircraft*> mActiveEnemies;
 
 
 };
+
+bool matchesCategories(SceneNode::Pair & colliders, Category::Type type1, Category::Type type2);
 
 
 #endif // WORLD_H

@@ -4,6 +4,7 @@
 #include <Entity.h>
 #include <ResourceHolder.hpp>
 #include <ResourceIdentifiers.hpp>
+#include "SFML/System/Time.hpp"
 
 
 class Projectile : public Entity
@@ -24,7 +25,7 @@ class Projectile : public Entity
         bool isGuided() const;
 
         virtual unsigned int getCategory() const;
-        virtual sf::FloatRect getBoundingRect() const;
+        virtual sf::FloatRect getBoundingRectangle() const;
         float getMaxSpeed() const;
         int getDamage() const;
 

@@ -1,3 +1,6 @@
+#ifndef UTILS_H
+#define UTILS_H
+
 #include <sstream>
 #include <SFML/System/Vector2.hpp>
 
@@ -24,3 +27,4 @@ sf::Vector2f unitVector(sf::Vector2f vector);
 
 
 #include <../src/utils.inl>
+#endif

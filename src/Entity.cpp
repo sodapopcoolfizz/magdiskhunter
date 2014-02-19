@@ -24,7 +24,7 @@ void Entity::destroy()
     mHitpoints=0;
 }
 
-bool Entity::isDestroyed()
+bool Entity::isDestroyed() const
 {
     return mHitpoints<=0;
 }

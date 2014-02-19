@@ -16,6 +16,8 @@ namespace Textures
         TitleScreen,
         Bullet,
         Missile,
+        HealthRefill,
+        MissileRefill,
     };
 
 }
@@ -27,6 +29,15 @@ namespace Fonts
         Main,
         dialog,
     };
+}
+
+namespace Music
+{
+        enum ID
+        {
+            MenuTheme,
+            LevelTheme,
+        };
 }
 
 typedef ResourceHolder<sf::Texture, Textures::ID> TextureHolder;

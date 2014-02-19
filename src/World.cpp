@@ -1,6 +1,8 @@
 #include "World.h"
 #include <limits.h>
-
+#include "utils.hpp"
+#include <set>
+#include "ShaderNode.h"
 
 World::World(sf::RenderWindow& window)
 : mWindow(window)
@@ -12,6 +14,7 @@ World::World(sf::RenderWindow& window)
 ,mSceneGraph()
 ,mSceneLayers()
 {
+    srand(time(0));
     loadTextures();
     loadFonts();
     buildScene();
@@ -22,12 +25,14 @@ World::World(sf::RenderWindow& window)
 
 void World::loadTextures()
 {
-    mTextures.load(Textures::Umag, "../../Media/Textures/UMagnet.png");
+    mTextures.load(Textures::Umag, "../../Media/Textures/magnet.png");
     mTextures.load(Textures::Desert, "../../Media/Textures/Desert.png");
     mTextures.load(Textures::Orb, "../../Media/Textures/Orb.png");
-    mTextures.load(Textures::Disk, "../../Media/Textures/Orb.png");
-    mTextures.load(Textures::Bullet,"../../Media/Textures/Bullet.png");
+    mTextures.load(Textures::Disk, "../../Media/Textures/disk.png");
+    mTextures.load(Textures::Bullet,"../../Media/Textures/bullet.png");
     mTextures.load(Textures::Missile,"../../Media/Textures/Missile.png");
+    mTextures.load(Textures::MissileRefill,"../../Media/Textures/MissileRefill.png");
+    mTextures.load(Textures::HealthRefill,"../../Media/Textures/HealthRefill.png");
 }
 
 void World::loadFonts()
@@ -49,13 +54,18 @@ void World::buildScene()
         mSceneGraph.attachChild(std::move(layer));
     }
     // Create background
-    sf::Texture& texture = mTextures.get(Textures::Desert);
-    sf::IntRect textureRect(mWorldBounds);
-    texture.setRepeated(true);
-
-    std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(texture,textureRect));
-    backgroundSprite->setPosition(mWorldBounds.left,mWorldBounds.top);
-    mSceneLayers[Background]->attachChild(std::move(backgroundSprite));
+/*     sf::Texture& texture = mTextures.get(Textures::Desert);
+ *     sf::IntRect textureRect(mWorldBounds);
+ *     texture.setRepeated(true);
+ *
+ *     std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(texture,textureRect));
+ *     backgroundSprite->setPosition(mWorldBounds.left,mWorldBounds.top);
+ *     mSceneLayers[Background]->attachChild(std::move(backgroundSprite));
+ */
+    sf::IntRect shaderRect(mWorldBounds);
+    std::unique_ptr<ShaderNode> backgroundShader(new ShaderNode("../../Media/shader.frag",shaderRect));
+    backgroundShader->setPosition(mWorldBounds.left, mWorldBounds.top);
+    mSceneLayers[Background]->attachChild(std::move(backgroundShader));
 
     // Create Aircraft
     std::unique_ptr<Aircraft> leader(new Aircraft(Aircraft::Umag, mTextures, mFonts));
@@ -91,6 +101,16 @@ void World::update(sf::Time dt)
         mPlayerAircraft->setVelocity(velocity/std::sqrt(2.f));
 
     mPlayerAircraft->accelerate(sf::Vector2f(0.f,mScrollSpeed));
+
+    destroyEntitiesOutsideView();
+    guideMissiles();
+
+	handleCollisions();
+	mSceneGraph.removeWrecks();
+	spawnEnemies();
+
+
+
     // applique les vélocités sur le reste des noeuds
     mSceneGraph.update(dt,mQueue);
 
@@ -105,7 +125,7 @@ void World::update(sf::Time dt)
 	position.y = std::min(position.y, viewBounds.top + viewBounds.height - borderDistance);
 	mPlayerAircraft->setPosition(position);
 
-	spawnEnemies();
+
 }
 
 CommandQueue& World::getCommandQueue()
@@ -167,3 +187,128 @@ void World::addEnemy(Aircraft::Type type, float relX, float relY)
     SpawnPoint spawn(type,mSpawnPosition.x + relX, mSpawnPosition.y - relY);
     mEnemySpawnPoints.push_back(spawn);
 }
+
+void World::guideMissiles()
+{
+    Command enemyCollector;
+    enemyCollector.category = Category::EnemyAircraft;
+    enemyCollector.action = derivedAction<Aircraft>(
+    [this] (Aircraft& enemy, sf::Time)
+    {
+        if(! enemy.isDestroyed())
+        {
+            mActiveEnemies.push_back(&enemy);
+        }
+    });
+
+    Command missileGuider;
+    missileGuider.category = Category::AlliedProjectile;
+    missileGuider.action = derivedAction<Projectile>(
+    [this] (Projectile& missile, sf::Time)
+    {
+        if(!missile.isGuided())
+        {
+            return;
+        }
+
+        float minDistance = std::numeric_limits<float>::max();
+        Aircraft* closestEnemy = nullptr;
+
+        for(auto enemy = mActiveEnemies.begin();enemy!=mActiveEnemies.end();++enemy)
+        {
+            float enemyDistance = distance(missile,*(*enemy));
+
+            if(enemyDistance<minDistance)
+            {
+                closestEnemy = *enemy;
+                minDistance  = enemyDistance;
+            }
+        }
+        if(closestEnemy)
+        {
+            missile.guideTowards(closestEnemy->getWorldPosition());
+        }
+    });
+    mQueue.push(enemyCollector);
+    mQueue.push(missileGuider);
+    mActiveEnemies.clear();
+}
+
+void World::handleCollisions()
+{
+    std::set<SceneNode::Pair> collisionPairs;
+    mSceneGraph.checkSceneCollision(mSceneGraph, collisionPairs);
+
+    for(auto itPair = collisionPairs.begin(); itPair!=collisionPairs.end(); ++itPair)
+    {
+        SceneNode::Pair pair = *itPair;
+        if(matchesCategories(pair,Category::PlayerAircraft, Category::EnemyAircraft))
+        {
+            auto & player = static_cast<Aircraft&>(*pair.first);
+            auto & enemy = static_cast<Aircraft&>(*pair.second);
+
+            player.damage(enemy.getHitpoints());
+            enemy.destroy();
+        }
+
+        else if (matchesCategories(pair, Category::EnemyAircraft, Category::AlliedProjectile)
+        || matchesCategories(pair, Category::PlayerAircraft, Category::EnemyProjectile))
+        {
+            auto & aircraft = static_cast<Aircraft&>(*pair.first);
+            auto & projectile = static_cast<Projectile&>(*pair.second);
+
+            aircraft.damage(projectile.getDamage());
+            projectile.destroy();
+        }
+
+        else if (matchesCategories(pair, Category::PlayerAircraft, Category::Pickup))
+        {
+            auto & aircraft = static_cast<Aircraft&>(*pair.first);
+            auto & pickup = static_cast<Pickup&>(*pair.second);
+
+            pickup.apply(aircraft);
+            pickup.destroy();
+
+
+        }
+    }
+}
+
+void World::destroyEntitiesOutsideView()
+{
+    Command command;
+    command.category = Category::Projectile | Category::EnemyAircraft | Category::Pickup;
+
+    command.action = derivedAction<Entity>(
+    [this] (Entity& e, sf::Time)
+    {
+        if(!getBattlefieldBounds().intersects(e.getBoundingRectangle()))
+        {
+            e.destroy();
+        }
+    });
+
+    mQueue.push(command);
+}
+
+bool matchesCategories(SceneNode::Pair & colliders, Category::Type type1, Category::Type type2)
+{
+    unsigned int category1 = colliders.first->getCategory();
+    unsigned int category2 = colliders.second->getCategory();
+
+    if (type1 & category1 && type2 & category2)
+    {
+        return true;
+    }
+
+    else if (type1 & category2 && type2 & category1)
+    {
+        std::swap(colliders.first, colliders.second);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+

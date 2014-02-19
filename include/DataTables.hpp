@@ -1,5 +1,6 @@
 #include "ResourceIdentifiers.hpp"
 #include <vector>
+#include "Aircraft.h"
 
 
 struct Direction
@@ -25,9 +26,16 @@ struct ProjectileData
     Textures::ID texture;
 };
 
+struct PickupData
+{
+    std::function<void(Aircraft&)> action;
+    Textures::ID texture;
+};
+
 
 
 std::vector<AircraftData> initializeAircraftData();
 std::vector<ProjectileData> initializeProjectileData();
+std::vector<PickupData> initializePickupData();
 
 

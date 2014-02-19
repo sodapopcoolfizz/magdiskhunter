@@ -4,6 +4,7 @@
 #include "StateStack.h"
 #include "StateIdentifiers.hpp"
 #include "ResourceIdentifiers.hpp"
+#include "MusicPlayer.h"
 
 class Application
 {
@@ -25,6 +26,7 @@ class Application
         TextureHolder			mTextures;
 	  	FontHolder				mFonts;
 		Player					mPlayer;
+		MusicPlayer             mMusic;
 
 };
 

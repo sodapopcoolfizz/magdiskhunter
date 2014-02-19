@@ -685,10 +685,10 @@
 
 1387014727 /home/vincent/magdiskmaster/src/ResourceHolder.inl
 
-1389564801 source:/home/vincent/magdiskmaster/src/Entity.cpp
+1390751368 source:/home/vincent/magdiskmaster/src/Entity.cpp
 	"Entity.h"
 
-1389564812 /home/vincent/magdiskmaster/include/Entity.h
+1390754497 /home/vincent/magdiskmaster/include/Entity.h
 	<SFML/System.hpp>
 	"SceneNode.h"
 	"CommandQueue.h"
@@ -707,20 +707,22 @@
 	"World.h"
 	"Player.h"
 
-1390074578 /home/vincent/magdiskmaster/include/SceneNode.h
+1390763333 /home/vincent/magdiskmaster/include/SceneNode.h
 	<memory>
 	<vector>
 	"SFML/Graphics.hpp"
 	"Command.hpp"
 	"Category.hpp"
 	"CommandQueue.h"
+	<set>
 
-1390081936 source:/home/vincent/magdiskmaster/src/Aircraft.cpp
+1392560601 source:/home/vincent/magdiskmaster/src/Aircraft.cpp
 	"Aircraft.h"
 	"DataTables.hpp"
 	"utils.hpp"
+	"Pickup.h"
 
-1390072413 /home/vincent/magdiskmaster/include/Aircraft.h
+1391886951 /home/vincent/magdiskmaster/include/Aircraft.h
 	"Entity.h"
 	"ResourceHolder.hpp"
 	"ResourceIdentifiers.hpp"
@@ -729,22 +731,24 @@
 	"CommandQueue.h"
 	"Projectile.h"
 
-1390081339 source:/home/vincent/magdiskmaster/src/SceneNode.cpp
+1390763312 source:/home/vincent/magdiskmaster/src/SceneNode.cpp
 	"SceneNode.h"
 	<cassert>
+	"utils.hpp"
+	"iostream"
 
-1390061923 /home/vincent/magdiskmaster/include/ResourceIdentifiers.hpp
+1392764372 /home/vincent/magdiskmaster/include/ResourceIdentifiers.hpp
 	"ResourceHolder.hpp"
 	"SFML/Graphics/Texture.hpp"
 	"SFML/Graphics/Font.hpp"
 
-1387809019 source:/home/vincent/magdiskmaster/src/SpriteNode.cpp
+1391941166 source:/home/vincent/magdiskmaster/src/SpriteNode.cpp
 	"SpriteNode.h"
 
 1387808679 /home/vincent/magdiskmaster/include/SpriteNode.h
 	"SceneNode.h"
 
-1389562662 /home/vincent/magdiskmaster/include/World.h
+1391885355 /home/vincent/magdiskmaster/include/World.h
 	<array>
 	<cmath>
 	"SFML/System.hpp"
@@ -753,13 +757,17 @@
 	"ResourceIdentifiers.hpp"
 	"ResourceHolder.hpp"
 	"Aircraft.h"
+	"Pickup.h"
 	"SpriteNode.h"
 	"CommandQueue.h"
 	"utils.hpp"
 
-1390080840 source:/home/vincent/magdiskmaster/src/World.cpp
+1391941489 source:/home/vincent/magdiskmaster/src/World.cpp
 	"World.h"
 	<limits.h>
+	"utils.hpp"
+	<set>
+	"ShaderNode.h"
 
 1388235209 /home/vincent/magdiskmaster/include/Command.hpp
 	<SFML/System/Time.hpp>
@@ -767,7 +775,7 @@
 	"Category.hpp"
 	<cassert>
 
-1390081101 /home/vincent/magdiskmaster/include/Category.hpp
+1391885055 /home/vincent/magdiskmaster/include/Category.hpp
 
 1388232293 source:/home/vincent/magdiskmaster/src/Command.cpp
 	"Command.hpp"
@@ -779,7 +787,7 @@
 	<queue>
 	"Command.hpp"
 
-1390050453 /home/vincent/magdiskmaster/include/Player.h
+1392560018 /home/vincent/magdiskmaster/include/Player.h
 	"CommandQueue.h"
 	"SFML/Window/Event.hpp"
 	"SFML/System/Vector2.hpp"
@@ -791,15 +799,16 @@
 	<iostream>
 	<functional>
 
-1388674642 source:/home/vincent/magdiskmaster/src/State.cpp
+1392764822 source:/home/vincent/magdiskmaster/src/State.cpp
 	"State.h"
 	"StateStack.h"
 
-1388675678 /home/vincent/magdiskmaster/include/State.h
+1392765068 /home/vincent/magdiskmaster/include/State.h
 	"StateIdentifiers.hpp"
 	"ResourceHolder.hpp"
 	"Player.h"
 	"SFML/Graphics.hpp"
+	"MusicPlayer.h"
 	<functional>
 
 1388874885 /home/vincent/magdiskmaster/include/StateIdentifiers.hpp
@@ -812,7 +821,7 @@
 1389454142 source:/home/vincent/magdiskmaster/src/StateStack.cpp
 	"StateStack.h"
 
-1389896757 source:/home/vincent/magdiskmaster/src/Application.cpp
+1392764919 source:/home/vincent/magdiskmaster/src/Application.cpp
 	"Application.h"
 	"TitleState.h"
 	"GameState.h"
@@ -820,10 +829,11 @@
 	"MenuState.h"
 	"StateStack.h"
 
-1388875095 /home/vincent/magdiskmaster/include/Application.h
+1392764979 /home/vincent/magdiskmaster/include/Application.h
 	"StateStack.h"
 	"StateIdentifiers.hpp"
 	"ResourceIdentifiers.hpp"
+	"MusicPlayer.h"
 
 1389452788 /home/vincent/magdiskmaster/include/TitleState.h
 	"State.h"
@@ -839,12 +849,14 @@
 1388936297 /home/vincent/magdiskmaster/include/MenuState.h
 	"State.h"
 
-1389452872 source:/home/vincent/magdiskmaster/src/GameState.cpp
+1392764163 source:/home/vincent/magdiskmaster/src/GameState.cpp
 	"GameState.h"
+	"ResourceIdentifiers.hpp"
 
-1389896701 source:/home/vincent/magdiskmaster/src/MenuState.cpp
+1392764157 source:/home/vincent/magdiskmaster/src/MenuState.cpp
 	"MenuState.h"
 	"utils.hpp"
+	"ResourceIdentifiers.hpp"
 
 1389736450 source:/home/vincent/magdiskmaster/src/PauseState.cpp
 	"PauseState.h"
@@ -866,18 +878,20 @@
 	"ResourceHolder.hpp"
 	"ResourceIdentifiers.hpp"
 
-1390064399 /home/vincent/magdiskmaster/include/DataTables.hpp
+1391885091 /home/vincent/magdiskmaster/include/DataTables.hpp
 	"ResourceIdentifiers.hpp"
 	<vector>
+	"Aircraft.h"
 
-1390064829 /home/vincent/magdiskmaster/include/utils.hpp
+1390333328 /home/vincent/magdiskmaster/include/utils.hpp
 	<sstream>
 	<SFML/System/Vector2.hpp>
 	<../src/utils.inl>
 
-1390082220 source:/home/vincent/magdiskmaster/src/DataTables.cpp
+1391889143 source:/home/vincent/magdiskmaster/src/DataTables.cpp
 	"DataTables.hpp"
 	"Aircraft.h"
+	"Pickup.h"
 
 1390076038 source:/home/vincent/magdiskmaster/src/TextNode.cpp
 	"TextNode.h"
@@ -891,16 +905,105 @@
 
 1389562752 /home/vincent/magdiskmaster/src/utils.inl
 
-1390063575 /home/vincent/magdiskmaster/include/Projectile.h
+1390761470 /home/vincent/magdiskmaster/include/Projectile.h
 	<Entity.h>
 	<ResourceHolder.hpp>
 	<ResourceIdentifiers.hpp>
+	"SFML/System/Time.hpp"
 
-1390077232 source:/home/vincent/magdiskmaster/src/Projectile.cpp
+1390761456 source:/home/vincent/magdiskmaster/src/Projectile.cpp
 	"Projectile.h"
 	"DataTables.hpp"
 	"utils.hpp"
 	"Category.hpp"
 	<cmath>
 	<iostream>
+
+1391889539 /home/vincent/magdiskmaster/include/Pickup.h
+	<Entity.h>
+	"ResourceHolder.hpp"
+	"ResourceIdentifiers.hpp"
+	"Aircraft.h"
+
+1391885209 source:/home/vincent/magdiskmaster/src/Pickup.cpp
+	"Pickup.h"
+	"DataTables.hpp"
+	"Category.hpp"
+	"utils.hpp"
+
+1392765128 source:/home/vincent/magdiskmaster/src/ShaderNode.cpp
+	"ShaderNode.h"
+	<iostream>
+
+1391945170 /home/vincent/magdiskmaster/include/ShaderNode.h
+	"SceneNode.h"
+
+1392764278 /home/vincent/magdiskmaster/include/MusicPlayer.h
+	<map>
+	"SFML/Audio.hpp"
+	"ResourceIdentifiers.hpp"
+
+1374391808 /usr/local/include//SFML/Audio/Music.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundStream.hpp>
+	<SFML/System/Mutex.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<vector>
+
+1374391808 /usr/local/include//SFML/Audio/Export.hpp
+	<SFML/Config.hpp>
+
+1374391808 /usr/local/include//SFML/Audio/SoundStream.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/Time.hpp>
+	<cstdlib>
+
+1374391808 /usr/local/include//SFML/Audio/SoundSource.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/Vector3.hpp>
+
+1374391808 /usr/local/include//SFML/Audio.hpp
+	<SFML/System.hpp>
+	<SFML/Audio/Listener.hpp>
+	<SFML/Audio/Music.hpp>
+	<SFML/Audio/Sound.hpp>
+	<SFML/Audio/SoundBuffer.hpp>
+	<SFML/Audio/SoundBufferRecorder.hpp>
+	<SFML/Audio/SoundRecorder.hpp>
+	<SFML/Audio/SoundStream.hpp>
+
+1374391808 /usr/local/include//SFML/Audio/Listener.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/Vector3.hpp>
+
+1374391808 /usr/local/include//SFML/Audio/Sound.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundSource.hpp>
+	<SFML/System/Time.hpp>
+	<cstdlib>
+
+1374391808 /usr/local/include//SFML/Audio/SoundBuffer.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/Time.hpp>
+	<string>
+	<vector>
+	<set>
+
+1374391808 /usr/local/include//SFML/Audio/SoundBufferRecorder.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/Audio/SoundBuffer.hpp>
+	<SFML/Audio/SoundRecorder.hpp>
+	<vector>
+
+1374391808 /usr/local/include//SFML/Audio/SoundRecorder.hpp
+	<SFML/Audio/Export.hpp>
+	<SFML/System/Thread.hpp>
+	<vector>
+
+1392764298 source:/home/vincent/magdiskmaster/src/MusicPlayer.cpp
+	"MusicPlayer.h"
+	"ResourceIdentifiers.hpp"
 

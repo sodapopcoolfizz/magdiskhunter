@@ -1,10 +1,12 @@
 #include "GameState.h"
+#include "ResourceIdentifiers.hpp"
 
 GameState::GameState(StateStack& sstack, Context context)
 : State(sstack, context)
 , mWorld(*context.mWindow)
 , mPlayer(*context.mPlayer)
 {
+    context.mMusicPlayer->play(Music::LevelTheme);
 }
 
 void GameState::draw()

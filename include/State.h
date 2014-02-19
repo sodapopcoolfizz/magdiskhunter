@@ -5,6 +5,7 @@
 #include "ResourceHolder.hpp"
 #include "Player.h"
 #include "SFML/Graphics.hpp"
+#include "MusicPlayer.h"
 #include <functional>
 
 class StateStack;
@@ -18,12 +19,14 @@ class State
             Context(sf::RenderWindow& window,
             TextureHolder& textures,
             FontHolder& fonts,
-            Player& player);
+            Player& player,
+            MusicPlayer& music);
 
             sf::RenderWindow* mWindow;
             TextureHolder* mTextures;
             FontHolder* mFonts;
             Player* mPlayer;
+            MusicPlayer * mMusicPlayer;
 
         };
 

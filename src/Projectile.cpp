@@ -26,6 +26,7 @@ bool Projectile::isGuided() const
     return mType == Missile;
 }
 
+
 unsigned int Projectile::getCategory() const
 {
     if (mType == EnemyBullet)
@@ -38,7 +39,7 @@ unsigned int Projectile::getCategory() const
     }
 }
 
-sf::FloatRect Projectile::getBoundingRect() const
+sf::FloatRect Projectile::getBoundingRectangle() const
 {
     return getWorldTransform().transformRect(mSprite.getGlobalBounds());
 }
@@ -55,6 +56,17 @@ int Projectile::getDamage() const
 
 void Projectile::updateCurrent(sf::Time dt, CommandQueue& commands)
 {
+    if(isGuided())
+    {
+        const float approachRate = 2000.f;
+        sf::Vector2f newVelocity = unitVector(getVelocity() + approachRate*dt.asSeconds()*mTargetDirection);
+
+        newVelocity*=getMaxSpeed();
+        float angle = std::atan2(newVelocity.y,newVelocity.x);
+        setRotation(toDegree(angle)+90.f);
+        setVelocity(newVelocity);
+    }
+
     Entity::updateCurrent(dt,commands);
 }
 

@@ -1,6 +1,7 @@
 #include "Aircraft.h"
 #include "DataTables.hpp"
 #include "utils.hpp"
+#include "Pickup.h"
 
 namespace
 {
@@ -29,8 +30,8 @@ Aircraft::Aircraft(Type type, const TextureHolder& textures, const FontHolder& f
     sf::FloatRect bounds = mSprite.getLocalBounds();
     mSprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
     mSpreadLevel = 1;
-    mFireRateLevel = 2;
-    mMissileAmmo = 2;
+    mFireRateLevel = 5;
+    mMissileAmmo = 10;
 
     std::unique_ptr<TextNode> healthDisplay(new TextNode(fonts,""));
     mHealthDisplay = healthDisplay.get();
@@ -47,9 +48,17 @@ Aircraft::Aircraft(Type type, const TextureHolder& textures, const FontHolder& f
     {
         createProjectile(node, Projectile::Missile, 0.f, 0.5f, textures);
     };
+
+    mDropPickupCommand.category = Category::SceneAirLayer;
+    mDropPickupCommand.action = [this, & textures] (SceneNode& node, sf::Time)
+    {
+        createPickup(node, textures);
+    };
+
     mIsFiring = false;
     mIsLaunchingMissile = false;
     mFireCountdown = sf::Time::Zero;
+    mIsMarkedForRemoval = false;
 }
 
 void Aircraft::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
@@ -103,6 +112,12 @@ void Aircraft::updateMovementPatterns(sf::Time dt)
 
 void Aircraft::updateCurrent(sf::Time dt, CommandQueue& commands)
 {
+    if (isDestroyed())
+    {
+        checkPickupDrop(commands);
+        mIsMarkedForRemoval = true;
+        return;
+    }
     updateMovementPatterns(dt);
     Entity::updateCurrent(dt,commands);
 
@@ -130,6 +145,7 @@ void Aircraft::checkProjectileLaunch(sf::Time dt, CommandQueue& commands)
         mFireCountdown += sf::seconds(1.f / (mFireRateLevel+1));
         mIsFiring = false;
     }
+
     else if (mFireCountdown > sf::Time::Zero)
     {
         mFireCountdown -=dt;
@@ -139,6 +155,15 @@ void Aircraft::checkProjectileLaunch(sf::Time dt, CommandQueue& commands)
     {
         commands.push(mMissileCommand);
         mIsLaunchingMissile = false;
+    }
+}
+
+void Aircraft::checkPickupDrop(CommandQueue& commands)
+{
+    int dice = rand()  % 3;
+    if (dice == 0)
+    {
+        commands.push(mDropPickupCommand);
     }
 }
 
@@ -180,6 +205,10 @@ void Aircraft::createBullets(SceneNode& node, const TextureHolder& textures) con
     }
 }
 
+
+
+
+
 void Aircraft::createProjectile(SceneNode& node, Projectile::Type type, float xOffset, float yOffset, const TextureHolder& textures) const
 {
     std::unique_ptr<Projectile> projectile(new Projectile(type, textures));
@@ -193,6 +222,15 @@ void Aircraft::createProjectile(SceneNode& node, Projectile::Type type, float xO
     node.attachChild(std::move(projectile));
 }
 
+void Aircraft::createPickup(SceneNode& node, const TextureHolder& textures) const
+{
+    auto typec = Pickup::TypeCount ;
+    auto type = static_cast<Pickup::Type> (rand() % typec);
+    std::unique_ptr<Pickup> drop(new Pickup(type,textures));
+    drop->setPosition(getWorldPosition());
+    node.attachChild(std::move(drop));
+}
+
 bool Aircraft::isAllied() const
 {
     return  mType  == Umag;
@@ -201,4 +239,18 @@ bool Aircraft::isAllied() const
 void Aircraft::collectMissiles(unsigned int count)
 {
     mMissileAmmo += count;
+}
+
+sf::FloatRect Aircraft::getBoundingRectangle() const
+{
+    return getWorldTransform().transformRect(mSprite.getGlobalBounds());
+}
+
+bool Aircraft::isMarkedForRemoval() const
+{
+    if(getCategory() == Category::PlayerAircraft)
+    {
+        return false;
+    }
+    return mIsMarkedForRemoval;
 }

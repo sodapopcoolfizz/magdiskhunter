@@ -1,5 +1,6 @@
 #include "DataTables.hpp"
 #include "Aircraft.h"
+#include "Pickup.h"
 
 std::vector<AircraftData> initializeAircraftData()
 {
@@ -10,7 +11,7 @@ std::vector<AircraftData> initializeAircraftData()
     data[Aircraft::Umag].texture = Textures::Umag;
 
     data[Aircraft::Disk].hitpoints = 20;
-    data[Aircraft::Disk].speed = 500.f;
+    data[Aircraft::Disk].speed = 300.f;
     data[Aircraft::Disk].texture = Textures::Disk;
 
     data[Aircraft::Disk].directions.push_back(Direction(60, 200));
@@ -36,6 +37,20 @@ std::vector<ProjectileData> initializeProjectileData()
     data[Projectile::Missile].damage = 10;
     data[Projectile::Missile].speed = 1000.f;
     data[Projectile::Missile].texture = Textures::Missile;
+
+    return data;
+}
+
+std::vector<PickupData> initializePickupData()
+{
+    std::vector<PickupData> data(Pickup::TypeCount);
+
+    data[Pickup::HealthRefill].texture = Textures::HealthRefill;
+    data[Pickup::HealthRefill].action = [] (Aircraft& player) {player.repair(25);};
+
+    data[Pickup::MissileRefill].texture = Textures::MissileRefill;
+    data[Pickup::MissileRefill].action = [] (Aircraft& player) {player.collectMissiles(3);};
+
 
     return data;
 }

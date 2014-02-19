@@ -1,5 +1,6 @@
 #include "MenuState.h"
 #include "utils.hpp"
+#include "ResourceIdentifiers.hpp"
 
 MenuState::MenuState(StateStack& sstack, Context context)
 : State(sstack,context)
@@ -26,6 +27,8 @@ MenuState::MenuState(StateStack& sstack, Context context)
 	mOptions.push_back(exitOption);
 
     updateOptionText();
+
+    context.mMusicPlayer->play(Music::MenuTheme);
 }
 
 void MenuState::draw()
