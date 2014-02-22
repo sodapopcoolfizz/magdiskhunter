@@ -2,6 +2,7 @@
 #include "DataTables.hpp"
 #include "utils.hpp"
 #include "Pickup.h"
+#include "SoundNode.h"
 
 namespace
 {
@@ -114,6 +115,7 @@ void Aircraft::updateCurrent(sf::Time dt, CommandQueue& commands)
 {
     if (isDestroyed())
     {
+        playLocalSound(commands,SoundEffect::Explosion);
         checkPickupDrop(commands);
         mIsMarkedForRemoval = true;
         return;
@@ -141,8 +143,10 @@ void Aircraft::checkProjectileLaunch(sf::Time dt, CommandQueue& commands)
 
     if (mIsFiring && mFireCountdown <= sf::Time::Zero)
     {
+        playLocalSound(commands,SoundEffect::AlliedGunfire);
         commands.push(mFireCommand);
         mFireCountdown += sf::seconds(1.f / (mFireRateLevel+1));
+
         mIsFiring = false;
     }
 
@@ -253,4 +257,20 @@ bool Aircraft::isMarkedForRemoval() const
         return false;
     }
     return mIsMarkedForRemoval;
+}
+
+void Aircraft::playLocalSound(CommandQueue& commands, SoundEffect::ID effect)
+{
+    sf::Vector2f position = getWorldPosition();
+
+    Command command;
+    command.category = Category::SoundEffect;
+    command.action = derivedAction<SoundNode>
+    (
+        [effect,position] (SoundNode& node,sf::Time)
+        {
+            node.play(effect,position);
+        }
+    );
+    commands.push(command);
 }

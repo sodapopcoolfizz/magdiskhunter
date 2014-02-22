@@ -3,10 +3,10 @@
 
 GameState::GameState(StateStack& sstack, Context context)
 : State(sstack, context)
-, mWorld(*context.mWindow)
+, mWorld(*context.mWindow,*context.mSoundPlayer)
 , mPlayer(*context.mPlayer)
 {
-    context.mMusicPlayer->play(Music::LevelTheme);
+    //context.mMusicPlayer->play(Music::LevelTheme);
 }
 
 void GameState::draw()

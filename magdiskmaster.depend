@@ -716,13 +716,14 @@
 	"CommandQueue.h"
 	<set>
 
-1392560601 source:/home/vincent/magdiskmaster/src/Aircraft.cpp
+1393026780 source:/home/vincent/magdiskmaster/src/Aircraft.cpp
 	"Aircraft.h"
 	"DataTables.hpp"
 	"utils.hpp"
 	"Pickup.h"
+	"SoundNode.h"
 
-1391886951 /home/vincent/magdiskmaster/include/Aircraft.h
+1393026686 /home/vincent/magdiskmaster/include/Aircraft.h
 	"Entity.h"
 	"ResourceHolder.hpp"
 	"ResourceIdentifiers.hpp"
@@ -749,7 +750,7 @@
 1387808679 /home/vincent/magdiskmaster/include/SpriteNode.h
 	"SceneNode.h"
 
-1391885355 /home/vincent/magdiskmaster/include/World.h
+1393027764 /home/vincent/magdiskmaster/include/World.h
 	<array>
 	<cmath>
 	"SFML/System.hpp"
@@ -762,13 +763,15 @@
 	"SpriteNode.h"
 	"CommandQueue.h"
 	"utils.hpp"
+	"SoundPlayer.h"
 
-1391941489 source:/home/vincent/magdiskmaster/src/World.cpp
+1393029818 source:/home/vincent/magdiskmaster/src/World.cpp
 	"World.h"
 	<limits.h>
 	"utils.hpp"
 	<set>
 	"ShaderNode.h"
+	"SoundNode.h"
 
 1388235209 /home/vincent/magdiskmaster/include/Command.hpp
 	<SFML/System/Time.hpp>
@@ -776,7 +779,7 @@
 	"Category.hpp"
 	<cassert>
 
-1391885055 /home/vincent/magdiskmaster/include/Category.hpp
+1393024293 /home/vincent/magdiskmaster/include/Category.hpp
 
 1388232293 source:/home/vincent/magdiskmaster/src/Command.cpp
 	"Command.hpp"
@@ -852,11 +855,11 @@
 1388936297 /home/vincent/magdiskmaster/include/MenuState.h
 	"State.h"
 
-1392764163 source:/home/vincent/magdiskmaster/src/GameState.cpp
+1393026873 source:/home/vincent/magdiskmaster/src/GameState.cpp
 	"GameState.h"
 	"ResourceIdentifiers.hpp"
 
-1392845143 source:/home/vincent/magdiskmaster/src/MenuState.cpp
+1393027282 source:/home/vincent/magdiskmaster/src/MenuState.cpp
 	"MenuState.h"
 	"utils.hpp"
 	"ResourceIdentifiers.hpp"
@@ -891,7 +894,7 @@
 	<SFML/System/Vector2.hpp>
 	<../src/utils.inl>
 
-1391889143 source:/home/vincent/magdiskmaster/src/DataTables.cpp
+1393027380 source:/home/vincent/magdiskmaster/src/DataTables.cpp
 	"DataTables.hpp"
 	"Aircraft.h"
 	"Pickup.h"
@@ -934,7 +937,7 @@
 	"Category.hpp"
 	"utils.hpp"
 
-1392765128 source:/home/vincent/magdiskmaster/src/ShaderNode.cpp
+1393026893 source:/home/vincent/magdiskmaster/src/ShaderNode.cpp
 	"ShaderNode.h"
 	<iostream>
 
@@ -1010,12 +1013,20 @@
 	"MusicPlayer.h"
 	"ResourceIdentifiers.hpp"
 
-1392845194 /home/vincent/magdiskmaster/include/SoundPlayer.h
+1392849112 /home/vincent/magdiskmaster/include/SoundPlayer.h
 	<list>
 	"SFML/System/NonCopyable.hpp"
 	"SFML/Audio/Sound.hpp"
 	"ResourceIdentifiers.hpp"
 
-1392845300 source:/home/vincent/magdiskmaster/src/SoundPlayer.cpp
+1393033041 source:/home/vincent/magdiskmaster/src/SoundPlayer.cpp
 	"SoundPlayer.h"
+	"SFML/Audio/Listener.hpp"
+
+1393026910 /home/vincent/magdiskmaster/include/SoundNode.h
+	"SoundPlayer.h"
+	"SceneNode.h"
+
+1393026930 source:/home/vincent/magdiskmaster/src/SoundNode.cpp
+	"SoundNode.h"
 

@@ -14,13 +14,14 @@
 #include "SpriteNode.h"
 #include "CommandQueue.h"
 #include "utils.hpp"
+#include "SoundPlayer.h"
 
 
 
 class World : private sf::NonCopyable
 {
     public:
-        explicit    World(sf::RenderWindow& window);
+        explicit    World(sf::RenderWindow& window, SoundPlayer & player);
         void        update(sf::Time dt);
         void        draw();
         CommandQueue& getCommandQueue();
@@ -42,6 +43,8 @@ class World : private sf::NonCopyable
 		void handleCollisions();
 
 		void destroyEntitiesOutsideView();
+
+		void updateSounds();
 
     private:
         enum Layer
@@ -77,6 +80,8 @@ class World : private sf::NonCopyable
 
         std::vector<SpawnPoint> mEnemySpawnPoints;
         std::vector<Aircraft*> mActiveEnemies;
+
+        SoundPlayer &           mSoundPlayer;
 
 
 };

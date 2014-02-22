@@ -3,8 +3,9 @@
 #include "utils.hpp"
 #include <set>
 #include "ShaderNode.h"
+#include "SoundNode.h"
 
-World::World(sf::RenderWindow& window)
+World::World(sf::RenderWindow& window, SoundPlayer& player)
 : mWindow(window)
 , mWorldView(window.getDefaultView())
 , mWorldBounds(0.f,0.f,mWorldView.getSize().x,5000.f)
@@ -13,6 +14,7 @@ World::World(sf::RenderWindow& window)
 , mPlayerAircraft(nullptr)
 ,mSceneGraph()
 ,mSceneLayers()
+,mSoundPlayer(player)
 {
     srand(time(0));
     loadTextures();
@@ -75,6 +77,9 @@ void World::buildScene()
 
     // Create Enemies
     addEnemies();
+
+    std::unique_ptr<SoundNode> soundSource(new SoundNode(mSoundPlayer));
+    mSceneGraph.attachChild(std::move(soundSource));
 }
 
 void World::draw()
@@ -111,6 +116,8 @@ void World::update(sf::Time dt)
 
 
 
+
+
     // applique les vélocités sur le reste des noeuds
     mSceneGraph.update(dt,mQueue);
 
@@ -124,6 +131,8 @@ void World::update(sf::Time dt)
 	position.y = std::max(position.y, viewBounds.top + borderDistance);
 	position.y = std::min(position.y, viewBounds.top + viewBounds.height - borderDistance);
 	mPlayerAircraft->setPosition(position);
+
+	updateSounds();
 
 
 }
@@ -263,6 +272,7 @@ void World::handleCollisions()
 
         else if (matchesCategories(pair, Category::PlayerAircraft, Category::Pickup))
         {
+            mPlayerAircraft->playLocalSound(mQueue,SoundEffect::CollectPickup);
             auto & aircraft = static_cast<Aircraft&>(*pair.first);
             auto & pickup = static_cast<Pickup&>(*pair.second);
 
@@ -310,5 +320,11 @@ bool matchesCategories(SceneNode::Pair & colliders, Category::Type type1, Catego
     {
         return false;
     }
+}
+
+void World::updateSounds()
+{
+    mSoundPlayer.setListenerPosition(mPlayerAircraft->getWorldPosition());
+    mSoundPlayer.removeStoppedSounds();
 }
 

@@ -41,11 +41,15 @@ class Aircraft : public Entity
         virtual sf::FloatRect getBoundingRectangle() const;
         virtual bool isMarkedForRemoval() const;
 
+        void playLocalSound(CommandQueue& commands, SoundEffect::ID effect);
+
+
 
     private:
         void createBullets(SceneNode& node, const TextureHolder& textures) const;
         void createProjectile(SceneNode& node, Projectile::Type, float xOffset, float yOffset, const TextureHolder& textures) const;
         void createPickup(SceneNode& node, const TextureHolder& textures) const;
+
 
 
         Type    mType;

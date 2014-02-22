@@ -59,7 +59,6 @@
 		<Unit filename="include/CommandQueue.h" />
 		<Unit filename="include/DataTables.hpp" />
 		<Unit filename="include/Entity.h" />
-		<Unit filename="include/Game.hpp" />
 		<Unit filename="include/GameState.h" />
 		<Unit filename="include/MenuState.h" />
 		<Unit filename="include/MusicPlayer.h" />
@@ -71,6 +70,7 @@
 		<Unit filename="include/ResourceIdentifiers.hpp" />
 		<Unit filename="include/SceneNode.h" />
 		<Unit filename="include/ShaderNode.h" />
+		<Unit filename="include/SoundNode.h" />
 		<Unit filename="include/SoundPlayer.h" />
 		<Unit filename="include/SpriteNode.h" />
 		<Unit filename="include/State.h" />
@@ -86,7 +86,6 @@
 		<Unit filename="src/CommandQueue.cpp" />
 		<Unit filename="src/DataTables.cpp" />
 		<Unit filename="src/Entity.cpp" />
-		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/GameState.cpp" />
 		<Unit filename="src/Main.cpp" />
 		<Unit filename="src/MenuState.cpp" />
@@ -98,6 +97,7 @@
 		<Unit filename="src/ResourceHolder.inl" />
 		<Unit filename="src/SceneNode.cpp" />
 		<Unit filename="src/ShaderNode.cpp" />
+		<Unit filename="src/SoundNode.cpp" />
 		<Unit filename="src/SoundPlayer.cpp" />
 		<Unit filename="src/SpriteNode.cpp" />
 		<Unit filename="src/State.cpp" />
