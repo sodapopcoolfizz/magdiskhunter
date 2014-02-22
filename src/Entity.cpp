@@ -54,3 +54,7 @@ void Entity::updateCurrent(sf::Time dt, CommandQueue& commands)
 {
     move(mVelocity * dt.asSeconds());
 }
+
+void Entity::setOutside()
+{
+}

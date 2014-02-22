@@ -35,6 +35,7 @@ void World::loadTextures()
     mTextures.load(Textures::Missile,"../../Media/Textures/Missile.png");
     mTextures.load(Textures::MissileRefill,"../../Media/Textures/MissileRefill.png");
     mTextures.load(Textures::HealthRefill,"../../Media/Textures/HealthRefill.png");
+    mTextures.load(Textures::FireSpread,"../../Media/Textures/FireSpread.png");
 }
 
 void World::loadFonts()
@@ -182,6 +183,16 @@ void World::addEnemies()
     addEnemy(Aircraft::Disk, 75.f, 900.f);
     addEnemy(Aircraft::Disk, -75.f, 1000.f);
     addEnemy(Aircraft::Disk, 75.f, 1200.f);
+
+    addEnemy(Aircraft::Disk, 0.f, 1500.f);
+    addEnemy(Aircraft::Disk, -75.f, 1000.f);
+    addEnemy(Aircraft::Disk, 75.f, 2000.f);
+    addEnemy(Aircraft::Disk, -75.f, 2500.f);
+    addEnemy(Aircraft::Disk, 75.f, 2600.f);
+    addEnemy(Aircraft::Disk, -75.f, 2800.f);
+    addEnemy(Aircraft::Disk, 75.f, 2900.f);
+    addEnemy(Aircraft::Disk, -75.f, 11000.f);
+    addEnemy(Aircraft::Disk, 75.f, 11200.f);
     // add other enemies; maybe try to implement enemies wave patterns ... via script or DataTable
 
     std::sort(mEnemySpawnPoints.begin(), mEnemySpawnPoints.end(),
@@ -295,6 +306,7 @@ void World::destroyEntitiesOutsideView()
         if(!getBattlefieldBounds().intersects(e.getBoundingRectangle()))
         {
             e.destroy();
+            e.setOutside();
         }
     });
 

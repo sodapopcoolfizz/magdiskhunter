@@ -19,6 +19,7 @@ namespace Textures
         Missile,
         HealthRefill,
         MissileRefill,
+        FireSpread,
     };
 
 }

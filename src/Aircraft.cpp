@@ -60,6 +60,7 @@ Aircraft::Aircraft(Type type, const TextureHolder& textures, const FontHolder& f
     mIsLaunchingMissile = false;
     mFireCountdown = sf::Time::Zero;
     mIsMarkedForRemoval = false;
+    mOutside = false;
 }
 
 void Aircraft::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
@@ -115,11 +116,15 @@ void Aircraft::updateCurrent(sf::Time dt, CommandQueue& commands)
 {
     if (isDestroyed())
     {
-        playLocalSound(commands,SoundEffect::Explosion);
         checkPickupDrop(commands);
         mIsMarkedForRemoval = true;
+        if(!getOutside())
+        {
+            playLocalSound(commands,SoundEffect::Explosion);
+        }
         return;
     }
+
     updateMovementPatterns(dt);
     Entity::updateCurrent(dt,commands);
 
@@ -201,7 +206,8 @@ void Aircraft::createBullets(SceneNode& node, const TextureHolder& textures) con
             createProjectile(node,type,-0.33f,0.5f,textures);
             createProjectile(node,type,0.33f,0.5f,textures);
             break;
-        case 3:
+
+        default:
             createProjectile(node,type,-0.33f,0.33f,textures);
             createProjectile(node,type,0.0f,0.5f,textures);
             createProjectile(node,type,0.33f,0.33f,textures);
@@ -250,6 +256,7 @@ sf::FloatRect Aircraft::getBoundingRectangle() const
     return getWorldTransform().transformRect(mSprite.getGlobalBounds());
 }
 
+
 bool Aircraft::isMarkedForRemoval() const
 {
     if(getCategory() == Category::PlayerAircraft)
@@ -273,4 +280,19 @@ void Aircraft::playLocalSound(CommandQueue& commands, SoundEffect::ID effect)
         }
     );
     commands.push(command);
+}
+
+void Aircraft::setOutside()
+{
+    mOutside = true;
+}
+
+bool Aircraft::getOutside()
+{
+    return mOutside;
+}
+
+void Aircraft::increaseFireSpread()
+{
+    mSpreadLevel++;
 }

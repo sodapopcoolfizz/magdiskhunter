@@ -141,6 +141,7 @@ bool SceneNode::isMarkedForRemoval() const
     return isDestroyed();
 }
 
+
 float distance(const SceneNode& Node1, const SceneNode& Node2)
 {
     return length(Node1.getWorldPosition()-Node2.getWorldPosition());

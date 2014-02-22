@@ -51,6 +51,9 @@ std::vector<PickupData> initializePickupData()
     data[Pickup::MissileRefill].texture = Textures::MissileRefill;
     data[Pickup::MissileRefill].action = [] (Aircraft& player) {player.collectMissiles(3);};
 
+    data[Pickup::FireSpread].texture = Textures::FireSpread;
+    data[Pickup::FireSpread].action = [] (Aircraft& player) {player.increaseFireSpread();};
+
 
     return data;
 }

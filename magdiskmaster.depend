@@ -685,10 +685,10 @@
 
 1387014727 /home/vincent/magdiskmaster/src/ResourceHolder.inl
 
-1390751368 source:/home/vincent/magdiskmaster/src/Entity.cpp
+1393066526 source:/home/vincent/magdiskmaster/src/Entity.cpp
 	"Entity.h"
 
-1390754497 /home/vincent/magdiskmaster/include/Entity.h
+1393066836 /home/vincent/magdiskmaster/include/Entity.h
 	<SFML/System.hpp>
 	"SceneNode.h"
 	"CommandQueue.h"
@@ -716,14 +716,14 @@
 	"CommandQueue.h"
 	<set>
 
-1393026780 source:/home/vincent/magdiskmaster/src/Aircraft.cpp
+1393105092 source:/home/vincent/magdiskmaster/src/Aircraft.cpp
 	"Aircraft.h"
 	"DataTables.hpp"
 	"utils.hpp"
 	"Pickup.h"
 	"SoundNode.h"
 
-1393026686 /home/vincent/magdiskmaster/include/Aircraft.h
+1393105047 /home/vincent/magdiskmaster/include/Aircraft.h
 	"Entity.h"
 	"ResourceHolder.hpp"
 	"ResourceIdentifiers.hpp"
@@ -732,13 +732,13 @@
 	"CommandQueue.h"
 	"Projectile.h"
 
-1390763312 source:/home/vincent/magdiskmaster/src/SceneNode.cpp
+1393065760 source:/home/vincent/magdiskmaster/src/SceneNode.cpp
 	"SceneNode.h"
 	<cassert>
 	"utils.hpp"
 	"iostream"
 
-1392845005 /home/vincent/magdiskmaster/include/ResourceIdentifiers.hpp
+1393105221 /home/vincent/magdiskmaster/include/ResourceIdentifiers.hpp
 	"ResourceHolder.hpp"
 	"SFML/Graphics/Texture.hpp"
 	"SFML/Graphics/Font.hpp"
@@ -765,7 +765,7 @@
 	"utils.hpp"
 	"SoundPlayer.h"
 
-1393029818 source:/home/vincent/magdiskmaster/src/World.cpp
+1393105401 source:/home/vincent/magdiskmaster/src/World.cpp
 	"World.h"
 	<limits.h>
 	"utils.hpp"
@@ -894,7 +894,7 @@
 	<SFML/System/Vector2.hpp>
 	<../src/utils.inl>
 
-1393027380 source:/home/vincent/magdiskmaster/src/DataTables.cpp
+1393105198 source:/home/vincent/magdiskmaster/src/DataTables.cpp
 	"DataTables.hpp"
 	"Aircraft.h"
 	"Pickup.h"
@@ -925,7 +925,7 @@
 	<cmath>
 	<iostream>
 
-1391889539 /home/vincent/magdiskmaster/include/Pickup.h
+1393104930 /home/vincent/magdiskmaster/include/Pickup.h
 	<Entity.h>
 	"ResourceHolder.hpp"
 	"ResourceIdentifiers.hpp"
@@ -1019,9 +1019,10 @@
 	"SFML/Audio/Sound.hpp"
 	"ResourceIdentifiers.hpp"
 
-1393033041 source:/home/vincent/magdiskmaster/src/SoundPlayer.cpp
+1393064738 source:/home/vincent/magdiskmaster/src/SoundPlayer.cpp
 	"SoundPlayer.h"
 	"SFML/Audio/Listener.hpp"
+	<iostream>
 
 1393026910 /home/vincent/magdiskmaster/include/SoundNode.h
 	"SoundPlayer.h"

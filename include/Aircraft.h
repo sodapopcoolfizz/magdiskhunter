@@ -26,8 +26,6 @@ class Aircraft : public Entity
         void accelerate(sf::Vector2f velocity);
         float getMaxSpeed() const;
 
-
-
         void updateTexts();
         void updateMovementPatterns(sf::Time dt);
         virtual void updateCurrent(sf::Time dt, CommandQueue& commands);
@@ -37,6 +35,7 @@ class Aircraft : public Entity
         void LaunchMissile();
         bool isAllied() const;
         void collectMissiles(unsigned int count);
+        void increaseFireSpread();
 
         virtual sf::FloatRect getBoundingRectangle() const;
         virtual bool isMarkedForRemoval() const;
@@ -49,6 +48,9 @@ class Aircraft : public Entity
         void createBullets(SceneNode& node, const TextureHolder& textures) const;
         void createProjectile(SceneNode& node, Projectile::Type, float xOffset, float yOffset, const TextureHolder& textures) const;
         void createPickup(SceneNode& node, const TextureHolder& textures) const;
+
+        virtual void setOutside();
+        bool getOutside();
 
 
 
@@ -69,6 +71,7 @@ class Aircraft : public Entity
 		int mMissileAmmo;
 
 		bool mIsMarkedForRemoval;
+		bool mOutside;
 
 };
 
