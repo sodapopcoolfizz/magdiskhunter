@@ -34,6 +34,15 @@ bool GameState::handleEvent(const sf::Event& event)
     {
         requestStackPush(States::Pause);
     }
+
+    if(!mWorld.hasPlayer())
+    {
+        //requestStackPop();
+        requestStackPush(States::GameOver);
+    }
+
     return true; // on empeche pas les autres etats de handleEvent
+
+
 }
 

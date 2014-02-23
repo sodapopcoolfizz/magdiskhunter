@@ -6,7 +6,7 @@ std::vector<AircraftData> initializeAircraftData()
 {
     std::vector<AircraftData> data(Aircraft::TypeCount);
 
-    data[Aircraft::Umag].hitpoints = 10000;
+    data[Aircraft::Umag].hitpoints = 100;
     data[Aircraft::Umag].speed = 600.f;
     data[Aircraft::Umag].texture = Textures::Umag;
 

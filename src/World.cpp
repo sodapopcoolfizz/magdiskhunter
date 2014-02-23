@@ -340,3 +340,8 @@ void World::updateSounds()
     mSoundPlayer.removeStoppedSounds();
 }
 
+bool World::hasPlayer()
+{
+    return !mPlayerAircraft->isDestroyed();
+}
+

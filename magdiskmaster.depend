@@ -750,7 +750,7 @@
 1387808679 /home/vincent/magdiskmaster/include/SpriteNode.h
 	"SceneNode.h"
 
-1393027764 /home/vincent/magdiskmaster/include/World.h
+1393191149 /home/vincent/magdiskmaster/include/World.h
 	<array>
 	<cmath>
 	"SFML/System.hpp"
@@ -765,7 +765,7 @@
 	"utils.hpp"
 	"SoundPlayer.h"
 
-1393105401 source:/home/vincent/magdiskmaster/src/World.cpp
+1393191349 source:/home/vincent/magdiskmaster/src/World.cpp
 	"World.h"
 	<limits.h>
 	"utils.hpp"
@@ -816,7 +816,7 @@
 	"SoundPlayer.h"
 	<functional>
 
-1388874885 /home/vincent/magdiskmaster/include/StateIdentifiers.hpp
+1393190897 /home/vincent/magdiskmaster/include/StateIdentifiers.hpp
 
 1389454141 /home/vincent/magdiskmaster/include/StateStack.h
 	"State.h"
@@ -826,13 +826,14 @@
 1389454142 source:/home/vincent/magdiskmaster/src/StateStack.cpp
 	"StateStack.h"
 
-1392845253 source:/home/vincent/magdiskmaster/src/Application.cpp
+1393191714 source:/home/vincent/magdiskmaster/src/Application.cpp
 	"Application.h"
 	"TitleState.h"
 	"GameState.h"
 	"PauseState.h"
 	"MenuState.h"
 	"StateStack.h"
+	"GameOverState.h"
 
 1392844837 /home/vincent/magdiskmaster/include/Application.h
 	"StateStack.h"
@@ -855,7 +856,7 @@
 1388936297 /home/vincent/magdiskmaster/include/MenuState.h
 	"State.h"
 
-1393026873 source:/home/vincent/magdiskmaster/src/GameState.cpp
+1393191446 source:/home/vincent/magdiskmaster/src/GameState.cpp
 	"GameState.h"
 	"ResourceIdentifiers.hpp"
 
@@ -894,7 +895,7 @@
 	<SFML/System/Vector2.hpp>
 	<../src/utils.inl>
 
-1393105198 source:/home/vincent/magdiskmaster/src/DataTables.cpp
+1393191389 source:/home/vincent/magdiskmaster/src/DataTables.cpp
 	"DataTables.hpp"
 	"Aircraft.h"
 	"Pickup.h"
@@ -1030,4 +1031,14 @@
 
 1393026930 source:/home/vincent/magdiskmaster/src/SoundNode.cpp
 	"SoundNode.h"
+
+1393191332 source:/home/vincent/magdiskmaster/src/GameOverState.cpp
+	"GameOverState.h"
+	"utils.hpp"
+	"ResourceIdentifiers.hpp"
+	"StateIdentifiers.hpp"
+
+1393192045 /home/vincent/magdiskmaster/include/GameOverState.h
+	<vector>
+	"State.h"
 

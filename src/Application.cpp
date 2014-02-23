@@ -4,11 +4,12 @@
 #include "PauseState.h"
 #include "MenuState.h"
 #include "StateStack.h"
+#include "GameOverState.h"
 
 const sf::Time Application::TimePerFrame = sf::seconds(1.f/60.f);
 
 Application::Application()
-: mWindow(sf::VideoMode(600, 480), "Mag Disk Hunter", sf::Style::Close)
+: mWindow(sf::VideoMode(600, 480), "Mag Disk Hunter", sf::Style::Resize)
 , mTextures()
 , mFonts()
 , mPlayer()
@@ -40,6 +41,7 @@ void Application::registerStates()
     mStateStack.registerState<MenuState>(States::Menu);
     mStateStack.registerState<GameState>(States::Game);
     mStateStack.registerState<PauseState>(States::Pause);
+    mStateStack.registerState<GameOverState>(States::GameOver);
 
 }
 
